@@ -1,0 +1,15 @@
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+
+# Variables sensibles
+*.tfvars
+
+# Backup files
+*.bak
+
+# Bootstrap Terraform
+bootstrap/.terraform/
+bootstrap/*.tfstate*
