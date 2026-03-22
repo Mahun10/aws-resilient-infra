@@ -1,8 +1,8 @@
-# 🚀 Resilient AWS Infrastructure with Terraform & CI/CD
+#  Resilient AWS Infrastructure with Terraform & CI/CD
 
 
 
-## 📌 Project Overview
+##  Project Overview
 
 
 
@@ -32,7 +32,7 @@ The architecture follows cloud best practices:
 
 
 
-## 🏗️ Architecture
+##  Architecture
 
 
 
@@ -64,7 +64,7 @@ The architecture follows cloud best practices:
 
 
 
-## ⚙️ Infrastructure as Code (Terraform)
+##  Infrastructure as Code (Terraform)
 
 
 
@@ -108,7 +108,7 @@ The infrastructure is fully defined using Terraform:
 
 
 
-## 🔐 Remote State & Locking
+##  Remote State & Locking
 
 
 
@@ -138,7 +138,7 @@ Terraform state is stored securely:
 
 
 
-## 🔁 CI/CD Pipeline (GitHub Actions)
+##  CI/CD Pipeline (GitHub Actions)
 
 
 
@@ -146,7 +146,7 @@ A complete CI/CD pipeline is implemented:
 
 
 
-### 🔍 Continuous Integration
+###  Continuous Integration
 
 
 
@@ -160,7 +160,7 @@ On each push:
 
 
 
-### 🚀 Controlled Deployment
+###  Controlled Deployment
 
 
 
@@ -172,7 +172,7 @@ On each push:
 
 
 
-### 🔐 Secrets Management
+###  Secrets Management
 
 
 
@@ -190,7 +190,7 @@ Sensitive values are stored in GitHub Secrets:
 
 
 
-## 📊 Monitoring & Observability
+##  Monitoring & Observability
 
 
 
@@ -208,7 +208,7 @@ Sensitive values are stored in GitHub Secrets:
 
 
 
-## 🔒 Security Best Practices
+##  Security Best Practices
 
 
 
@@ -230,7 +230,7 @@ Sensitive values are stored in GitHub Secrets:
 
 
 
-## 🧪 Example Output
+##  Example Output
 
 
 
@@ -250,7 +250,7 @@ After deployment:
 
 
 
-## 📸 Demo
+##  Demo
 
 
 
@@ -266,7 +266,7 @@ Example response from the application:
 
 
 
-## 🎯 What I Learned
+##  What I Learned
 
 
 
@@ -286,7 +286,7 @@ Example response from the application:
 
 
 
-## 🚀 Future Improvements
+##  Future Improvements
 
 
 
@@ -306,7 +306,7 @@ Example response from the application:
 
 
 
-## 👨‍💻 Author
+##  Author
 
 
 
