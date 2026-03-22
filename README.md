@@ -1,70 +1,70 @@
-\# 🚀 Resilient AWS Infrastructure with Terraform \& CI/CD
+# 🚀 Resilient AWS Infrastructure with Terraform & CI/CD
 
 
 
-\## 📌 Project Overview
+## 📌 Project Overview
 
 
 
-This project demonstrates the design and deployment of a \*\*resilient, scalable, and production-ready AWS infrastructure\*\* using \*\*Terraform (Infrastructure as Code)\*\* and \*\*GitHub Actions (CI/CD)\*\*.
+This project demonstrates the design and deployment of a **resilient, scalable, and production-ready AWS infrastructure** using **Terraform (Infrastructure as Code)** and **GitHub Actions (CI/CD)**.
 
 
 
 The architecture follows cloud best practices:
 
-\- High availability across multiple AZs
+- High availability across multiple AZs
 
-\- Private/public subnet isolation
+- Private/public subnet isolation
 
-\- Auto-scaling compute layer
+- Auto-scaling compute layer
 
-\- Managed database (RDS)
+- Managed database (RDS)
 
-\- Monitoring and alerting
+- Monitoring and alerting
 
-\- Secure remote state management
+- Secure remote state management
 
-\- CI/CD pipeline with approval workflow
-
-
-
-\---
+- CI/CD pipeline with approval workflow
 
 
 
-\## 🏗️ Architecture
+---
 
 
 
-\### Key Components
+## 🏗️ Architecture
 
 
 
-\- \*\*VPC\*\* with public \& private subnets
-
-\- \*\*Application Load Balancer (ALB)\*\* (internet-facing)
-
-\- \*\*Auto Scaling Group (ASG)\*\* with EC2 instances (private subnets)
-
-\- \*\*RDS PostgreSQL\*\* (private, non-public)
-
-\- \*\*NAT Gateway\*\* for outbound internet access
-
-\- \*\*Security Groups\*\* (least privilege)
-
-\- \*\*CloudWatch + SNS\*\* for monitoring and alerts
-
-\- \*\*CloudTrail\*\* for auditing
-
-\- \*\*SSM Session Manager\*\* (no SSH access required)
+### Key Components
 
 
 
-\---
+- **VPC** with public & private subnets
+
+- **Application Load Balancer (ALB)** (internet-facing)
+
+- **Auto Scaling Group (ASG)** with EC2 instances (private subnets)
+
+- **RDS PostgreSQL** (private, non-public)
+
+- **NAT Gateway** for outbound internet access
+
+- **Security Groups** (least privilege)
+
+- **CloudWatch + SNS** for monitoring and alerts
+
+- **CloudTrail** for auditing
+
+- **SSM Session Manager** (no SSH access required)
 
 
 
-\## ⚙️ Infrastructure as Code (Terraform)
+---
+
+
+
+## ⚙️ Infrastructure as Code (Terraform)
 
 
 
@@ -72,43 +72,43 @@ The infrastructure is fully defined using Terraform:
 
 
 
-\- Modular and readable `.tf` files
+- Modular and readable `.tf` files
 
-\- Variables for configuration
+- Variables for configuration
 
-\- Outputs for key resources
+- Outputs for key resources
 
-\- Remote state with:
+- Remote state with:
 
-&#x20; - \*\*S3 bucket (versioned, encrypted)\*\*
+&#x20; - **S3 bucket (versioned, encrypted)**
 
-&#x20; - \*\*DynamoDB (state locking)\*\*
-
-
-
-\### Example files:
-
-\- `vpc.tf`
-
-\- `alb.tf`
-
-\- `autoscaling.tf`
-
-\- `rds.tf`
-
-\- `security.tf`
-
-\- `monitoring.tf`
-
-\- `cloudtrail.tf`
+&#x20; - **DynamoDB (state locking)**
 
 
 
-\---
+### Example files:
+
+- `vpc.tf`
+
+- `alb.tf`
+
+- `autoscaling.tf`
+
+- `rds.tf`
+
+- `security.tf`
+
+- `monitoring.tf`
+
+- `cloudtrail.tf`
 
 
 
-\## 🔐 Remote State \& Locking
+---
+
+
+
+## 🔐 Remote State & Locking
 
 
 
@@ -116,7 +116,7 @@ Terraform state is stored securely:
 
 
 
-\- \*\*S3 bucket\*\*
+- **S3 bucket**
 
 &#x20; - Versioning enabled
 
@@ -126,7 +126,7 @@ Terraform state is stored securely:
 
 
 
-\- \*\*DynamoDB\*\*
+- **DynamoDB**
 
 &#x20; - Prevents concurrent Terraform executions
 
@@ -134,11 +134,11 @@ Terraform state is stored securely:
 
 
 
-\---
+---
 
 
 
-\## 🔁 CI/CD Pipeline (GitHub Actions)
+## 🔁 CI/CD Pipeline (GitHub Actions)
 
 
 
@@ -146,91 +146,91 @@ A complete CI/CD pipeline is implemented:
 
 
 
-\### 🔍 Continuous Integration
+### 🔍 Continuous Integration
 
 
 
 On each push:
 
-\- `terraform fmt`
+- `terraform fmt`
 
-\- `terraform validate`
+- `terraform validate`
 
-\- `terraform plan`
-
-
-
-\### 🚀 Controlled Deployment
+- `terraform plan`
 
 
 
-\- Manual approval required before deployment
-
-\- Uses GitHub \*\*Environments (production)\*\*
-
-\- After approval → `terraform apply`
+### 🚀 Controlled Deployment
 
 
 
-\### 🔐 Secrets Management
+- Manual approval required before deployment
+
+- Uses GitHub **Environments (production)**
+
+- After approval → `terraform apply`
+
+
+
+### 🔐 Secrets Management
 
 
 
 Sensitive values are stored in GitHub Secrets:
 
-\- AWS credentials
+- AWS credentials
 
-\- Database password
+- Database password
 
-\- Alert email
-
-
-
-\---
+- Alert email
 
 
 
-\## 📊 Monitoring \& Observability
+---
 
 
 
-\- \*\*CloudWatch metrics \& alarms\*\*
-
-\- \*\*SNS notifications\*\*
-
-\- \*\*ALB health checks\*\*
-
-\- Infrastructure visibility dashboard
+## 📊 Monitoring & Observability
 
 
 
-\---
+- **CloudWatch metrics & alarms**
+
+- **SNS notifications**
+
+- **ALB health checks**
+
+- Infrastructure visibility dashboard
 
 
 
-\## 🔒 Security Best Practices
+---
 
 
 
-\- No SSH access → \*\*SSM Session Manager\*\*
-
-\- Private EC2 instances
-
-\- RDS not publicly accessible
-
-\- Strict Security Groups
-
-\- Encrypted state storage
-
-\- Secrets never stored in code
+## 🔒 Security Best Practices
 
 
 
-\---
+- No SSH access → **SSM Session Manager**
+
+- Private EC2 instances
+
+- RDS not publicly accessible
+
+- Strict Security Groups
+
+- Encrypted state storage
+
+- Secrets never stored in code
 
 
 
-\## 🧪 Example Output
+---
+
+
+
+## 🧪 Example Output
 
 
 
@@ -238,19 +238,19 @@ After deployment:
 
 
 
-\- ALB DNS → public entry point
+- ALB DNS → public entry point
 
-\- Auto-scaled EC2 instances responding
+- Auto-scaled EC2 instances responding
 
-\- PostgreSQL database available internally
-
-
-
-\---
+- PostgreSQL database available internally
 
 
 
-\## 📸 Demo
+---
+
+
+
+## 📸 Demo
 
 
 
@@ -266,51 +266,51 @@ Example response from the application:
 
 
 
-\## 🎯 What I Learned
+## 🎯 What I Learned
 
 
 
-\- Designing resilient AWS architectures
+- Designing resilient AWS architectures
 
-\- Writing production-ready Terraform code
+- Writing production-ready Terraform code
 
-\- Managing Terraform state securely
+- Managing Terraform state securely
 
-\- Implementing CI/CD pipelines for infrastructure
+- Implementing CI/CD pipelines for infrastructure
 
-\- Applying DevOps and cloud best practices
-
-
-
-\---
+- Applying DevOps and cloud best practices
 
 
 
-\## 🚀 Future Improvements
+---
 
 
 
-\- Multi-environment (dev/staging/prod)
-
-\- OIDC authentication (no static AWS keys)
-
-\- Terraform modules
-
-\- Blue/green deployment
-
-\- Cost optimization
+## 🚀 Future Improvements
 
 
 
-\---
+- Multi-environment (dev/staging/prod)
+
+- OIDC authentication (no static AWS keys)
+
+- Terraform modules
+
+- Blue/green deployment
+
+- Cost optimization
 
 
 
-\## 👨‍💻 Author
+---
 
 
 
-Matteo – aspiring Cloud \& DevOps Engineer
+## 👨‍💻 Author
+
+
+
+Matteo – aspiring Cloud & DevOps Engineer
 
 
 
