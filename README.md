@@ -286,23 +286,7 @@ Example response from the application:
 
 
 
-##  Future Improvements
 
-
-
-- Multi-environment (dev/staging/prod)
-
-- OIDC authentication (no static AWS keys)
-
-- Terraform modules
-
-- Blue/green deployment
-
-- Cost optimization
-
-
-
----
 
 
 
