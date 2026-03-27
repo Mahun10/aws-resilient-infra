@@ -296,7 +296,7 @@ Example response from the application:
 
 
 
-Matteo – aspiring Cloud & DevOps Engineer
+Matteo –  Cloud & DevOps junior Engineer 
 
 
 
