@@ -1,0 +1,35 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ECR_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_ECR_SECRET_ACCESS_KEY }}
+          aws-region: eu-west-3
+
+      - name: Login to ECR
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build Docker image
+        run: |
+          docker build -t my-app ./app
+
+      - name: Tag image
+        run: |
+          docker tag my-app:latest 387642999483.dkr.ecr.eu-west-3.amazonaws.com/my-app-repo:latest
+
+      - name: Push to ECR
+        run: |
+          docker push 387642999483.dkr.ecr.eu-west-3.amazonaws.com/my-app-repo:latest
