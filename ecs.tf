@@ -87,10 +87,10 @@ resource "aws_ecs_service" "app" {
   }
 
   load_balancer {
-    target_group_arn = aws_lb_target_group.app_tg.arn
+    target_group_arn = aws_lb_target_group.ecs_tg.arn
     container_name   = "app"
     container_port   = 80
   }
 
-  depends_on = [aws_lb_listener.http]
+  depends_on = [aws_lb_listener.http_ecs_test]
 }
