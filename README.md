@@ -119,10 +119,12 @@ An AWS WAF Web ACL is deployed and attached to the Application Load Balancer to 
 
 ### Validation
 
-The WAF was tested using:
-### Load Testing Script (PowerShell)
+- I simulated application attacks (SQL injection, XSS)
+- and High-frequency request bursts
 
-To test the scalability and resilience of the infrastructure, you can use the following PowerShell script. It triggers 500 asynchronous web requests toward the Application Load Balancer (ALB).
+###  High-frequency request bursts command (PowerShell) : 
+
+It triggers 500 asynchronous web requests toward the Application Load Balancer (ALB).
 
 ```powershell
 for ($i = 0; $i -lt 500; $i++) {
@@ -131,22 +133,20 @@ for ($i = 0; $i -lt 500; $i++) {
     }
 }
 ```
+- Abnormal traffic patterns were detected  
+- Protection effectiveness confirmed via AWS WAF metrics
 ![result_known_badinputs](images/Known_bad_inputs.png)
 
 ![result_rate_limit](images/rule_limit.png)
 
+###  XSS attacks :   
 ![command commun_rules](images/XSS_attack.png)
+
+Malicious requests were successfully blocked : 
 
 ![result_commun_rules](images/Commun-rules.png)
 
-- Simulated application attacks (SQL injection, XSS)
-- High-frequency request bursts
 
-👉 Result:
-
-- Malicious requests were successfully blocked  
-- Abnormal traffic patterns were detected  
-- Protection effectiveness confirmed via AWS WAF metrics  
 
 
 
