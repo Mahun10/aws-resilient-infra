@@ -121,6 +121,14 @@ An AWS WAF Web ACL is deployed and attached to the Application Load Balancer to 
 
 The WAF was tested using:
 
+![result_rate_limit](images/rule_limit.png)
+
+![result_known_badinputs](images/Known_bad_inputs.png)
+
+![command commun_rules](images/XSS_attack.png)
+
+![result_commun_rules](images/Commun-rules.png)
+
 - Simulated application attacks (SQL injection, XSS)
 - High-frequency request bursts
 
