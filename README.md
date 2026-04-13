@@ -117,7 +117,7 @@ An AWS WAF Web ACL is deployed and attached to the Application Load Balancer to 
 - **Rate-based rule**  
   → Limits requests per IP (100 requests / 5 minutes) to mitigate abusive traffic
 
-### Validation
+### Results
 
 - I simulated application attacks (SQL injection, XSS)
 - and High-frequency request bursts
@@ -134,8 +134,10 @@ for ($i = 0; $i -lt 500; $i++) {
 }
 ```
 - Abnormal traffic patterns were detected  
-- Protection effectiveness confirmed via AWS WAF metrics
+
 ![result_known_badinputs](images/Known_bad_inputs.png)
+
+- Protection effectiveness confirmed via AWS WAF metrics
 
 ![result_rate_limit](images/rule_limit.png)
 
