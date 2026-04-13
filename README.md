@@ -58,7 +58,7 @@ The architecture follows cloud best practices:
 
 - **SSM Session Manager** (no SSH access required)
 
-- **Web Application Firewall** to reduce the attack scope and protect the application from Layer 7 attacks
+- **Web Application Firewall** to reduce the attack scope and protect the load balancer's entrey point 
 
 
 
