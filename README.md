@@ -120,10 +120,20 @@ An AWS WAF Web ACL is deployed and attached to the Application Load Balancer to 
 ### Validation
 
 The WAF was tested using:
+### Load Testing Script (PowerShell)
+
+To test the scalability and resilience of the infrastructure, you can use the following PowerShell script. It triggers 500 asynchronous web requests toward the Application Load Balancer (ALB).
+
+```powershell
+for ($i = 0; $i -lt 500; $i++) {
+    Start-Job {
+        Invoke-WebRequest -Uri "[http://resilient-aws-infra-alb-828325941.eu-west-3.elb.amazonaws.com](http://resilient-aws-infra-alb-828325941.eu-west-3.elb.amazonaws.com)" -UseBasicParsing | Out-Null
+    }
+}
+```
+![result_known_badinputs](images/Known_bad_inputs.png)
 
 ![result_rate_limit](images/rule_limit.png)
-
-![result_known_badinputs](images/Known_bad_inputs.png)
 
 ![command commun_rules](images/XSS_attack.png)
 
