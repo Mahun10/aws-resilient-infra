@@ -66,7 +66,7 @@ The architecture follows cloud best practices:
 
 ---
 
-###  Demo
+##  Demo
 ##  Example Output
 
 
@@ -81,9 +81,24 @@ After deployment:
 
 - PostgreSQL database available internally
 
-## Auto scaling
+### Auto scaling
 
 Example response from the application:
+
+![Instances default number](images/2_Instances.png)
+
+![Command Stress](images/stress_command.png)
+
+![Command Stress](images/Alarmes_CPU.png)
+
+![Build third instances](images/creation_3eme_instance.png)
+
+![third instances](images/creation_3_completed.png)
+
+
+
+
+
 
 ## 🔐 Web Application Firewall (AWS WAF)
 
