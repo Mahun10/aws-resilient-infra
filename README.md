@@ -250,7 +250,74 @@ After deployment:
 
 ---
 
+## 🐳 Containerization (Docker)
 
+The application is containerized using Docker to ensure consistency, portability, and scalability across environments.
+
+### Implementation
+
+- Application packaged as a Docker image  
+- Image stored in **Amazon ECR**  
+- Deployed using:
+  - EC2 Auto Scaling Group (initial setup)
+  - ECS (container-based architecture)
+
+### Benefits
+
+- Immutable deployments  
+- Consistent runtime environment  
+- Simplified scaling and deployment  
+- Alignment with cloud-native best practices  
+
+
+---
+
+## 🔐 Web Application Firewall (AWS WAF)
+
+An AWS WAF Web ACL is deployed and attached to the Application Load Balancer to protect the application from Layer 7 attacks.
+
+### Implemented Rules
+
+- **AWSManagedRulesCommonRuleSet**  
+  → Protects against common web attacks (SQL injection, XSS, malformed requests)
+
+- **AWSManagedRulesKnownBadInputsRuleSet**  
+  → Detects and blocks known malicious payload patterns
+
+- **Rate-based rule**  
+  → Limits requests per IP (100 requests / 5 minutes) to mitigate abusive traffic
+
+### Validation
+
+The WAF was tested using:
+
+- Simulated application attacks (SQL injection, XSS)
+- High-frequency request bursts
+
+👉 Result:
+
+- Malicious requests were successfully blocked  
+- Abnormal traffic patterns were detected  
+- Protection effectiveness confirmed via AWS WAF metrics  
+
+
+---
+
+## 🔐 HTTPS (Not Implemented)
+
+HTTPS is not implemented in this project.
+
+### Reason
+
+This infrastructure is designed as a **demonstration and validation environment**, and is not intended to be maintained long-term in production.
+
+### Planned (if productionized)
+
+- TLS certificates via AWS ACM  
+- HTTPS listener on ALB  
+- HTTP → HTTPS redirection  
+
+👉 This would ensure encrypted communication between clients and the application.
 
 ##  Demo
 
