@@ -66,25 +66,11 @@ The architecture follows cloud best practices:
 
 ## 🐳 Containerization (Docker)
 
-The application is containerized using Docker to ensure consistency, portability, and scalability across environments.
+The project evolved from a traditional EC2-based deployment to a more modern and secure cloud-native architecture.
 
-### Implementation
-
-- Application packaged as a Docker image  
-- Image stored in **Amazon ECR**  
-- Deployed using:
-  - EC2 Auto Scaling Group (initial setup)
-  - ECS (container-based architecture)
-
-### Benefits
-
-- Immutable deployments  
-- Consistent runtime environment  
-- Simplified scaling and deployment  
-- Alignment with cloud-native best practices  
-
-
----
+The application was packaged into a Docker container to ensure portability and consistency.
+The image was stored in Amazon ECR and deployed within the infrastructure.
+This enabled a transition toward a container-based architecture (ECS) instead of relying only on EC2 instances.
 
 ## 🔐 Web Application Firewall (AWS WAF)
 
