@@ -336,6 +336,7 @@ The image was stored in Amazon ECR and deployed within the infrastructure.
 This enabled a transition toward a container-based architecture (ECS) instead of relying only on EC2 instances.
 
 
+![Docker](images/Docker_architecture.png)
 
 ## 🔐 HTTPS (Not Implemented)
 
