@@ -91,11 +91,11 @@ Example response from the application:
 
 ![Command Stress](images/Alarmes_CPU.png)
 
-![notif auto scaling starting](images/notification_auto_scaling.png)
-
 ![Build third instances](images/creation_3eme_instance.png)
 
 ![third instances](images/creation_3_completed.png)
+
+![notif auto scaling starting](images/notification_auto_scaling.png)
 
 
 
