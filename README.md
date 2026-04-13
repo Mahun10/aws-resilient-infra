@@ -62,7 +62,7 @@ The architecture follows cloud best practices:
 
 
 
-![AWS Architecture](architecture.png)
+![AWS Architecture](images/architecture.png)
 
 ---
 
