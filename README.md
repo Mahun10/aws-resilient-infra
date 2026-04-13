@@ -64,14 +64,6 @@ The architecture follows cloud best practices:
 
 ---
 
-## 🐳 Containerization (Docker)
-
-The project evolved from a traditional EC2-based deployment to a more modern and secure cloud-native architecture.
-
-The application was packaged into a Docker container to ensure portability and consistency.
-The image was stored in Amazon ECR and deployed within the infrastructure.
-This enabled a transition toward a container-based architecture (ECS) instead of relying only on EC2 instances.
-
 ## 🔐 Web Application Firewall (AWS WAF)
 
 An AWS WAF Web ACL is deployed and attached to the Application Load Balancer to protect the application from Layer 7 attacks.
@@ -314,7 +306,13 @@ Example response from the application:
 
 
 
+## 🐳 Containerization (Docker)
 
+The project evolved from a traditional EC2-based deployment to a more modern and secure cloud-native architecture.
+
+The application was packaged into a Docker container to ensure portability and consistency.
+The image was stored in Amazon ECR and deployed within the infrastructure.
+This enabled a transition toward a container-based architecture (ECS) instead of relying only on EC2 instances.
 
 
 
