@@ -58,11 +58,32 @@ The architecture follows cloud best practices:
 
 - **SSM Session Manager** (no SSH access required)
 
+- **Web Application Firewall** to reduce the attack scope and protect the application from Layer 7 attacks
+
 
 
 ![AWS Architecture](architecture.png)
 
 ---
+
+###  Demo
+##  Example Output
+
+
+
+After deployment:
+
+
+
+- ALB DNS → public entry point
+
+- Auto-scaled EC2 instances responding
+
+- PostgreSQL database available internally
+
+## Auto scaling
+
+Example response from the application:
 
 ## 🔐 Web Application Firewall (AWS WAF)
 
@@ -260,19 +281,6 @@ Sensitive values are stored in GitHub Secrets:
 
 
 
-##  Example Output
-
-
-
-After deployment:
-
-
-
-- ALB DNS → public entry point
-
-- Auto-scaled EC2 instances responding
-
-- PostgreSQL database available internally
 
 
 
@@ -280,6 +288,17 @@ After deployment:
 
 
 ---
+
+
+## 🐳 Containerization (Docker)
+
+The project evolved from a traditional EC2-based deployment to a more modern and secure cloud-native architecture.
+
+The application was packaged into a Docker container to ensure portability and consistency.
+The image was stored in Amazon ECR and deployed within the infrastructure.
+This enabled a transition toward a container-based architecture (ECS) instead of relying only on EC2 instances.
+
+
 
 ## 🔐 HTTPS (Not Implemented)
 
@@ -296,26 +315,6 @@ This infrastructure is designed as a **demonstration and validation environment*
 - HTTP → HTTPS redirection  
 
 👉 This would ensure encrypted communication between clients and the application.
-
-##  Demo
-
-
-
-Example response from the application:
-
-
-
-
-## 🐳 Containerization (Docker)
-
-The project evolved from a traditional EC2-based deployment to a more modern and secure cloud-native architecture.
-
-The application was packaged into a Docker container to ensure portability and consistency.
-The image was stored in Amazon ECR and deployed within the infrastructure.
-This enabled a transition toward a container-based architecture (ECS) instead of relying only on EC2 instances.
-
-
-
 
 
 
