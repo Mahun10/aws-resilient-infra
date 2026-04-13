@@ -93,7 +93,7 @@ Example response from the application:
 
 ![Build third instances](images/creation_3eme_instance.png)
 
-![third instances](images/creation_3_completed.png)
+![third instances](images/3eme_instance.png)
 
 ![notif auto scaling starting](images/notification_auto_scaling.png)
 
