@@ -317,21 +317,21 @@ Sensitive values are stored in GitHub Secrets:
 
 
 
+---
+
 ## 🔐 HTTPS (Not Implemented)
 
 HTTPS is not implemented in this project.
 
 ### Reason
 
-This infrastructure is designed as a **demonstration and validation environment**, and is not intended to be maintained long-term in production.
+This infrastructure is designed as a **demonstration environment** and is not intended to be maintained long-term.
 
-### Planned (if productionized)
+### Planned improvement
 
-- TLS certificates via AWS ACM  
-- HTTPS listener on ALB  
-- HTTP → HTTPS redirection  
-
-👉 This would ensure encrypted communication between clients and the application.
+- TLS via AWS Certificate Manager (ACM)
+- HTTPS listener on ALB
+- HTTP → HTTPS redirection
 
 
 
