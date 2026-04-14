@@ -1,34 +1,23 @@
-#  Resilient AWS Infrastructure with Terraform & CI/CD
+# 🚀 Resilient Cloud-Native AWS Infrastructure (Terraform, ECS Fargate, WAF, CI/CD)
 
 
 
-##  Project Overview
+## 📌 Project Overview
 
+This project demonstrates the design and deployment of a **resilient, scalable, and cloud-native AWS infrastructure** using **Terraform (Infrastructure as Code)** and **GitHub Actions (CI/CD)**.
 
+The architecture follows modern cloud best practices:
 
-This project demonstrates the design and deployment of a **resilient, scalable, and production-ready AWS infrastructure** using **Terraform (Infrastructure as Code)** and **GitHub Actions (CI/CD)**.
+- High availability across multiple AZs  
+- Private/public subnet isolation  
+- Containerized application (Docker)  
+- Deployment using **ECS Fargate**  
+- Image storage with **Amazon ECR**  
+- Layer 7 protection using **AWS WAF**  
+- Managed database (RDS)  
+- Monitoring, alerting and auditing  
 
-
-
-The architecture follows cloud best practices:
-
-- High availability across multiple AZs
-
-- Private/public subnet isolation
-
-- Auto-scaling compute layer
-
-- Managed database (RDS)
-
-- Monitoring and alerting
-
-- Secure remote state management
-
-- CI/CD pipeline with approval workflow
-
-
-
----
+The project evolved from an EC2-based architecture to a **fully containerized deployment**, improving scalability and reducing operational overhead.
 
 
 
@@ -38,48 +27,32 @@ The architecture follows cloud best practices:
 
 ### Key Components
 
-
-
-- **VPC** with public & private subnets
-
-- **Application Load Balancer (ALB)** (internet-facing)
-
-- **Auto Scaling Group (ASG)** with EC2 instances (private subnets)
-
-- **RDS PostgreSQL** (private, non-public)
-
-- **NAT Gateway** for outbound internet access
-
-- **Security Groups** (least privilege)
-
-- **CloudWatch + SNS** for monitoring and alerts
-
-- **CloudTrail** for auditing
-
+- **VPC** with public & private subnets across 2 AZs  
+- **Application Load Balancer (ALB)** (internet-facing)  
+- **ECS Fargate** (containerized application in private subnets)  
+- **Amazon ECR** (Docker image registry)  
+- **RDS PostgreSQL** (private, single AZ)  
+- **NAT Gateway** for outbound internet access  
+- **Security Groups** (least privilege access)  
+- **CloudWatch + SNS** for monitoring and alerting  
+- **CloudTrail** for auditing  
+- **AWS WAF** for Layer 7 protection  
 - **SSM Session Manager** (no SSH access required)
 
-- **Web Application Firewall** to reduce the attack scope and protect the load balancer's entrey point 
 
-
-
-![AWS Architecture](images/architecture.png)
 
 ---
 
-##  Demo
-##  Example Output
+## 🔄 Architecture Evolution
+
+The initial version of the infrastructure was based on EC2 instances managed by an Auto Scaling Group.
+
+- EC2 instances deployed in private subnets  
+- Auto Scaling Group based on CPU utilization  
+- ALB distributing traffic to EC2 instances  
 
 
-
-After deployment:
-
-
-
-- ALB DNS → public entry point
-
-- Auto-scaled EC2 instances responding
-
-- PostgreSQL database available internally
+![AWS Architecture](images/architecture.png)
 
 ### Auto scaling
 
@@ -98,7 +71,13 @@ Example response from the application:
 ![notif auto scaling starting](images/notification_auto_scaling.png)
 
 
+The architecture was later **migrated to ECS Fargate**:
 
+- Containerized application (Docker)  
+- Deployment via ECS Service  
+- No server management required
+
+![Docker](images/Docker_architecture.png)
 
 
 
@@ -327,16 +306,9 @@ Sensitive values are stored in GitHub Secrets:
 ---
 
 
-## 🐳 Containerization (Docker)
-
-The project evolved from a traditional EC2-based deployment to a more modern and secure cloud-native architecture.
-
-The application was packaged into a Docker container to ensure portability and consistency.
-The image was stored in Amazon ECR and deployed within the infrastructure.
-This enabled a transition toward a container-based architecture (ECS) instead of relying only on EC2 instances.
 
 
-![Docker](images/Docker_architecture.png)
+
 
 ## 🔐 HTTPS (Not Implemented)
 
