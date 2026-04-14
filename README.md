@@ -79,6 +79,11 @@ Example response from the application:
 
 ![Docker](images/Docker_architecture.png)
 
+![Docker](images/creation_containers.png)
+
+![Docker](images/creation_containers_completed.png)
+
+
 
 
 ## 🔐 Web Application Firewall (AWS WAF)
