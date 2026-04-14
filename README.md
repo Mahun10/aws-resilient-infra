@@ -71,7 +71,7 @@ Example response from the application:
 ![notif auto scaling starting](images/notification_auto_scaling.png)
 
 
-The architecture was later **migrated to ECS Fargate**:
+##The architecture was later **migrated to ECS Fargate**:
 
 - Containerized application (Docker)  
 - Deployment via ECS Service  
