@@ -83,6 +83,8 @@ Example response from the application:
 
 ![Docker](images/creation_containers_completed.png)
 
+👉 This transition improved scalability, flexibility, and reduced operational overhead.
+
 
 
 
