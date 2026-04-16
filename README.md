@@ -56,8 +56,6 @@ The initial version of the infrastructure was based on EC2 instances managed by 
 
 ### Auto scaling
 
-Example response from the application:
-
 ![Instances default number](images/2_Instances.png)
 
 ![Command Stress](images/stress_command.png)
