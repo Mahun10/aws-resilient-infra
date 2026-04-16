@@ -49,22 +49,35 @@ The initial version of the infrastructure was based on EC2 instances managed by 
 
 - EC2 instances deployed in private subnets  
 - Auto Scaling Group based on CPU utilization  
-- ALB distributing traffic to EC2 instances  
+- ALB distributing traffic to EC2 instances
 
 
 ![AWS Architecture](images/architecture.png)
 
 ### Auto scaling
 
+Initially, the infrastructure runs with two instances.
+
 ![Instances default number](images/2_Instances.png)
 
+To simulate high traffic and CPU consumption, we used the command `stress --cpu 2 --timeout 600`.
+
+This command launches two CPU worker threads (`--cpu 2`) in order to generate processor load for 600 seconds (`--timeout 600`), which corresponds to 10 minutes.
+
 ![Command Stress](images/stress_command.png)
+
+
+At the same time, CPU utilization can be monitored in real time through Amazon CloudWatch.
+
+Once CPU utilization exceeds the configured threshold of 50%, the auto scaling policy is triggered and new instances begin to launch automatically.
 
 ![Command Stress](images/Alarmes_CPU.png)
 
 ![Build third instances](images/creation_3eme_instance.png)
 
 ![third instances](images/3eme_instance.png)
+
+The service indicates that the scaling operation succeeded and increases the number of running instances from 2 to 4 in order to handle the additional load.
 
 ![notif auto scaling starting](images/notification_auto_scaling.png)
 
