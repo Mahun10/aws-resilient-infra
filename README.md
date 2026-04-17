@@ -47,7 +47,7 @@ The project evolved from an EC2-based architecture to a **fully containerized de
 
 
 
-##  Architecture
+## 🏗️ Architecture
 
 
 
@@ -175,7 +175,7 @@ Malicious requests were successfully blocked :
 
 
 
-##  Infrastructure as Code (Terraform)
+## 🛠️ Infrastructure as Code (Terraform)
 
 
 
@@ -219,7 +219,7 @@ The infrastructure is fully defined using Terraform:
 
 
 
-##  Remote State & Locking
+## ☁️ Remote State & Locking
 
 
 
@@ -249,7 +249,7 @@ Terraform state is stored securely:
 
 
 
-##  CI/CD Pipeline (GitHub Actions)
+## 🚀 CI/CD Pipeline (GitHub Actions)
 
 
 
@@ -301,7 +301,7 @@ Sensitive values are stored in GitHub Secrets:
 
 
 
-##  Monitoring & Observability
+## 📊 Monitoring & Observability
 
 
 
@@ -319,7 +319,7 @@ Sensitive values are stored in GitHub Secrets:
 
 
 
-##  Security Best Practices
+## 🛡️ Security Best Practices
 
 
 
@@ -334,25 +334,6 @@ Sensitive values are stored in GitHub Secrets:
 - Encrypted state storage
 
 - Secrets never stored in code
-
-
-
----
-
-
-
-
-
-
----
-
-
----
-
-
-
-
-
 
 ---
 
