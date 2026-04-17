@@ -125,7 +125,7 @@ The service indicates that the scaling operation succeeded and increases the num
 
 
 
-## 🔐 Web Application Firewall (AWS WAF)
+## 🧱 Web Application Firewall (AWS WAF)
 
 An AWS WAF Web ACL is deployed and attached to the Application Load Balancer to protect the application from Layer 7 attacks.
 
