@@ -21,7 +21,7 @@
 * [Remote State & Locking](#remote-state--locking)
 * [CI/CD Pipeline (GitHub Actions)](#cicd-pipeline-github-actions)
 * [Monitoring & Observability](#monitoring--observability)
-* [Security Best Practices](#security-best-practices)
+* [Security Best Practices](#%EF%B8%8F-security-best-practices)
 * [HTTPS (Not Implemented)](#-https-not-implemented)
 * [What I Learned](#what-i-learned)
 * [Author](#author)
