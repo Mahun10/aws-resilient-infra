@@ -86,6 +86,8 @@ Initially, the infrastructure runs with two instances.
 
 ![Instances default number](images/2_Instances.png)
 
+
+
 To simulate high traffic and CPU consumption, we used the command `stress --cpu 2 --timeout 600`.
 
 This command launches two CPU worker threads (`--cpu 2`) in order to generate processor load for 600 seconds (`--timeout 600`), which corresponds to 10 minutes.
