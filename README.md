@@ -9,7 +9,7 @@
 ## 📖 Table of Contents
 
 * [Project Overview](#-project-overview)
-* [Architecture](#-architecture)
+* [Architecture](#-Architecture)
     * [Key Components](#key-components)
 * [Architecture Evolution](#-architecture-evolution)
     * [Auto Scaling & Stress Tests](#auto-scaling)
