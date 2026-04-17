@@ -24,7 +24,7 @@
 * [Security Best Practices](#security-best-practices)
 * [HTTPS (Not Implemented)](#-https-not-implemented)
 * [What I Learned](#what-i-learned)
-* [Author](#-author)
+* [Author](#author)
 
 ---
 
