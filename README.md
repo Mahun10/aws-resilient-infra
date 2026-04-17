@@ -6,6 +6,28 @@
 
 ---
 
+## 📖 Table of Contents
+
+* [Project Overview](#-project-overview)
+* [Architecture](#-architecture)
+    * [Key Components](#key-components)
+* [Architecture Evolution](#-architecture-evolution)
+    * [Auto Scaling & Stress Tests](#auto-scaling)
+    * [Migration to ECS Fargate](#the-architecture-was-later-migrated-to-ecs-fargate)
+* [Web Application Firewall (AWS WAF)](#-web-application-firewall-aws-waf)
+    * [Implemented Rules](#implemented-rules)
+    * [Attack Simulation Results](#results)
+* [Infrastructure as Code (Terraform)](#-infrastructure-as-code-terraform)
+* [Remote State & Locking](#-remote-state--locking)
+* [CI/CD Pipeline (GitHub Actions)](#-cicd-pipeline-github-actions)
+* [Monitoring & Observability](#-monitoring--observability)
+* [Security Best Practices](#-security-best-practices)
+* [HTTPS (Not Implemented)](#-https-not-implemented)
+* [What I Learned](#-what-i-learned)
+* [Author](#-author)
+
+---
+
 ## 📌 Project Overview
 
 This project demonstrates the design and deployment of a **resilient, scalable, and cloud-native AWS infrastructure** using **Terraform (Infrastructure as Code)** and **GitHub Actions (CI/CD)**.
