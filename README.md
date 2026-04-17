@@ -353,7 +353,7 @@ This infrastructure is designed as a **demonstration environment** and is not in
 
 
 
-##  What I Learned
+## 🎓 What I Learned
 
 
 
@@ -377,8 +377,8 @@ This infrastructure is designed as a **demonstration environment** and is not in
 
 
 
-##  Author
-
+## 👨‍💻 Author
+ 
 
 
 Matteo –  Cloud & DevOps junior Engineer 
