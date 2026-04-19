@@ -46,4 +46,4 @@ jobs:
             --cluster resilient-aws-infra-ecs-cluster \
             --service resilient-aws-infra-ecs-service \
             --force-new-deployment \
-            --region eu-west-3
+            --region eu-west-3 
