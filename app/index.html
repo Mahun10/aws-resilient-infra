@@ -1,1 +1,343 @@
-<h1>Hello from Docker on AWS. How are you today Matteo ? </h1>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker on AWS | Matteo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animation de fond avec des bulles */
+        .bubble {
+            position: absolute;
+            bottom: -100px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: rise 10s infinite ease-in;
+        }
+
+        @keyframes rise {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-1200px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Carte principale */
+        .container {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 3rem;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 3rem 4rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            transform: translateY(0);
+            animation: float 3s ease-in-out infinite;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Logo Docker animé */
+        .docker-logo {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            animation: spin 10s linear infinite;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Titre principal */
+        h1 {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        /* Sous-titre */
+        .greeting {
+            font-size: 1.5rem;
+            color: #333;
+            margin: 1rem 0;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        .greeting span {
+            display: inline-block;
+            animation: wave 1s ease-in-out infinite;
+            transform-origin: 70% 70%;
+        }
+
+        @keyframes wave {
+            0%, 100% {
+                transform: rotate(0deg);
+            }
+            25% {
+                transform: rotate(20deg);
+            }
+            75% {
+                transform: rotate(-10deg);
+            }
+        }
+
+        /* Badges technologiques */
+        .badges {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: transform 0.3s ease;
+        }
+
+        .badge:hover {
+            transform: scale(1.1);
+        }
+
+        /* Informations système */
+        .info {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: #f0f0f0;
+            border-radius: 10px;
+            animation: fadeInUp 1s ease 0.9s both;
+        }
+
+        .info p {
+            color: #555;
+            margin: 0.5rem 0;
+            font-family: monospace;
+        }
+
+        .docker-status {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: #4caf50;
+            border-radius: 50%;
+            margin-right: 10px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.5;
+                transform: scale(1.2);
+            }
+        }
+
+        /* Bouton */
+        .cta-button {
+            margin-top: 2rem;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease 1.2s both;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .card {
+                padding: 2rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .greeting {
+                font-size: 1.2rem;
+            }
+            
+            .badges {
+                gap: 0.5rem;
+            }
+            
+            .badge {
+                padding: 0.4rem 1rem;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="docker-logo">
+                🐳
+            </div>
+            <h1>Hello from Docker on AWS</h1>
+            <div class="greeting">
+                How are you today <span>👋</span> <strong>Matteo</strong> ?
+            </div>
+            
+            <div class="badges">
+                <div class="badge">🐳 Docker</div>
+                <div class="badge">☁️ AWS</div>
+                <div class="badge">🚀 Deployed</div>
+                <div class="badge">💻 Container</div>
+            </div>
+            
+            <div class="info">
+                <p>
+                    <span class="docker-status"></span>
+                    Container Status: <strong>Running ✅</strong>
+                </p>
+                <p>📦 Image: nginx:custom</p>
+                <p>🌍 Region: AWS Cloud</p>
+                <p>⏰ Deployed: <span id="timestamp"></span></p>
+            </div>
+            
+            <button class="cta-button" onclick="showMessage()">
+                ✨ Click for a surprise ✨
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Générer des bulles d'arrière-plan aléatoires
+        function createBubble() {
+            const bubble = document.createElement('div');
+            bubble.classList.add('bubble');
+            const size = Math.random() * 100 + 20;
+            bubble.style.width = `${size}px`;
+            bubble.style.height = `${size}px`;
+            bubble.style.left = `${Math.random() * 100}%`;
+            bubble.style.animationDuration = `${Math.random() * 10 + 5}s`;
+            bubble.style.animationDelay = `${Math.random() * 5}s`;
+            document.body.appendChild(bubble);
+            
+            setTimeout(() => {
+                bubble.remove();
+            }, 15000);
+        }
+        
+        // Créer des bulles toutes les 500ms
+        setInterval(createBubble, 500);
+        
+        // Afficher la date et l'heure actuelles
+        const now = new Date();
+        const formattedDate = now.toLocaleString('fr-FR', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        });
+        document.getElementById('timestamp').textContent = formattedDate;
+        
+        // Fonction pour le bouton surprise
+        function showMessage() {
+            const messages = [
+                "🎉 Docker is awesome! 🎉",
+                "🚀 You're running on AWS! 🚀",
+                "💪 Matteo, you're crushing it! 💪",
+                "🌟 Containerization is magic! 🌟",
+                "🎈 Thanks for deploying me! 🎈",
+                "🐳 Whales are cool, just like Docker! 🐳"
+            ];
+            
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            alert(randomMessage);
+            
+            // Animation supplémentaire
+            const button = document.querySelector('.cta-button');
+            button.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                button.style.transform = 'scale(1)';
+            }, 200);
+        }
+        
+        // Animation au chargement
+        window.addEventListener('load', () => {
+            console.log('🚀 Site Docker AWS chargé avec succès !');
+        });
+    </script>
+</body>
+</html>
