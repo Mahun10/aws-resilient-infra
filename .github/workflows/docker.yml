@@ -46,4 +46,4 @@ jobs:
             --cluster my-ecs-cluster \
             --service my-ecs-service \
             --force-new-deployment \
-            --region eu-west-3
+            --region eu-west-3 
