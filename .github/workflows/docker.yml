@@ -34,11 +34,11 @@ jobs:
 
       - name: Tag image
         run: |
-          docker tag my-app:latest 387642999483.dkr.ecr.eu-west-3.amazonaws.com/my-app-repo:latest
+          docker tag my-app:latest 591127499740.dkr.ecr.eu-west-3.amazonaws.com/my-app-repo:latest
 
       - name: Push to ECR
         run: |
-          docker push 387642999483.dkr.ecr.eu-west-3.amazonaws.com/my-app-repo:latest
+          docker push 591127499740.dkr.ecr.eu-west-3.amazonaws.com/my-app-repo:latest
 
       - name: Force new ECS deployment
         run: |
