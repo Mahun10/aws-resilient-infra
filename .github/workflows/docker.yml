@@ -13,45 +13,36 @@ jobs:
   docker:
     runs-on: ubuntu-latest
 
-    permissions:
-      contents: read
-
-    env:
-      AWS_REGION: eu-west-3
-      ECR_REPOSITORY: my-app-repo
-      ECS_CLUSTER: my-ecs-cluster
-      ECS_SERVICE: my-ecs-service
-      CONTAINER_NAME: my-app
-      IMAGE_URI: 387642999483.dkr.ecr.eu-west-3.amazonaws.com/my-app-repo:latest
-
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-access-key-id: ${{ secrets.AWS_ECR_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_ECR_SECRET_ACCESS_KEY }}
-          aws-region: ${{ env.AWS_REGION }}
+          aws-region: eu-west-3
 
       - name: Login to ECR
-        uses: aws-actions/amazon-ecr-login@v2
+        uses: aws-actions/amazon-ecr-login@v1
 
       - name: Build Docker image
-        run: docker build -t my-app:latest ./app
+        run: |
+          docker build -t my-app ./app
 
       - name: Tag image
-        run: docker tag my-app:latest $IMAGE_URI
+        run: |
+          docker tag my-app:latest 387642999483.dkr.ecr.eu-west-3.amazonaws.com/my-app-repo:latest
 
       - name: Push to ECR
-        run: docker push $IMAGE_URI
+        run: |
+          docker push 387642999483.dkr.ecr.eu-west-3.amazonaws.com/my-app-repo:latest
 
       - name: Force new ECS deployment
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
           aws ecs update-service \
-            --cluster $ECS_CLUSTER \
-            --service $ECS_SERVICE \
+            --cluster my-ecs-cluster \
+            --service my-ecs-service \
             --force-new-deployment \
-            --region $AWS_REGION 
+            --region eu-west-3
