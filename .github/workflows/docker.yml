@@ -43,7 +43,7 @@ jobs:
       - name: Force new ECS deployment
         run: |
           aws ecs update-service \
-            --cluster my-ecs-cluster \
-            --service my-ecs-service \
+            --cluster resilient-aws-infra-ecs-cluster \
+            --service resilient-aws-infra-ecs-service \
             --force-new-deployment \
-            --region eu-west-3 
+            --region eu-west-3
