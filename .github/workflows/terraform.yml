@@ -29,7 +29,7 @@ jobs:
 
     env:
       TF_VAR_db_password: ${{ secrets.TF_VAR_DB_PASSWORD }}
-      TF_VAR_alert_email: ${{ secrets.TF_VAR_ALERT_EMAIL }}
+      TF_VAR_alert_email: ${{ secrets.TF_VAR_ALERT_EMAIL }} 
 
     steps:
       - name: Checkout repository
