@@ -2,10 +2,10 @@ terraform {
   required_version = ">= 1.5.0"
 
   backend "s3" {
-    bucket         = "matte-resilient-aws-infra-tfstate-2026"
+    bucket         = "matte-resilient-aws-infra-tfstate-2027"
     key            = "envs/dev/terraform.tfstate"
     region         = "eu-west-3"
-    dynamodb_table = "matte-resilient-aws-infra-locks"
+    dynamodb_table = "matte-resilient-aws-infra-locks-2027"
     encrypt        = true
   }
 
