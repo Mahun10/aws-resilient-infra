@@ -1,343 +1,797 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Docker on AWS | Matteo</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mahun | Ingénieur Cloud & DevOps</title>
+  <meta name="description" content="Portfolio de Mahun, ingénieur Cloud & DevOps. Architecture AWS résiliente, Terraform, Docker, ECS, CI/CD et sécurité cloud." />
+  <meta name="color-scheme" content="dark" />
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            overflow-x: hidden;
-        }
+  <style>
+    :root {
+      --bg: #0b1020;
+      --bg-soft: #121933;
+      --card: rgba(255, 255, 255, 0.06);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text: #eef2ff;
+      --muted: #a7b0d6;
+      --primary: #59e1ff;
+      --secondary: #9b7bff;
+      --success: #6cf0b2;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      --radius: 20px;
+      --max: 1180px;
+    }
 
-        /* Animation de fond avec des bulles */
-        .bubble {
-            position: absolute;
-            bottom: -100px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            pointer-events: none;
-            animation: rise 10s infinite ease-in;
-        }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(89, 225, 255, 0.14), transparent 30%),
+        radial-gradient(circle at top right, rgba(155, 123, 255, 0.16), transparent 28%),
+        linear-gradient(180deg, #09101f 0%, #0b1020 45%, #0d1325 100%);
+      color: var(--text);
+      overflow-x: hidden;
+    }
 
-        @keyframes rise {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-1200px) rotate(360deg);
-                opacity: 0;
-            }
-        }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
 
-        /* Carte principale */
-        .container {
-            position: relative;
-            z-index: 10;
-            text-align: center;
-            padding: 3rem;
-        }
+    .container {
+      width: min(calc(100% - 2rem), var(--max));
+      margin: 0 auto;
+    }
 
-        .card {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 3rem 4rem;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
-            transform: translateY(0);
-            animation: float 3s ease-in-out infinite;
-            transition: transform 0.3s ease;
-        }
+    .section { padding: 96px 0; }
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3.3rem);
+      line-height: 1.05;
+      margin: 0 0 12px;
+      letter-spacing: -0.03em;
+    }
 
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
-        }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border: 1px solid rgba(89, 225, 255, 0.18);
+      border-radius: 999px;
+      color: var(--primary);
+      background: rgba(89, 225, 255, 0.08);
+      font-size: 0.92rem;
+      margin-bottom: 18px;
+    }
 
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-20px);
-            }
-        }
+    .muted { color: var(--muted); }
+    .gradient-text {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
 
-        /* Logo Docker animé */
-        .docker-logo {
-            font-size: 5rem;
-            margin-bottom: 1rem;
-            display: inline-block;
-            animation: spin 10s linear infinite;
-        }
+    .glass {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow);
+    }
 
-        @keyframes spin {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
-        }
+    .nav-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      padding: 16px 0;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(to bottom, rgba(9, 16, 31, 0.78), rgba(9, 16, 31, 0.2));
+    }
 
-        /* Titre principal */
-        h1 {
-            font-size: 3rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin-bottom: 1rem;
-            animation: fadeInUp 1s ease;
-        }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 16px 20px;
+    }
 
-        /* Sous-titre */
-        .greeting {
-            font-size: 1.5rem;
-            color: #333;
-            margin: 1rem 0;
-            animation: fadeInUp 1s ease 0.3s both;
-        }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
 
-        .greeting span {
-            display: inline-block;
-            animation: wave 1s ease-in-out infinite;
-            transform-origin: 70% 70%;
-        }
+    .brand-badge {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(89, 225, 255, 0.22), rgba(155, 123, 255, 0.22));
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--primary);
+      font-weight: 800;
+    }
 
-        @keyframes wave {
-            0%, 100% {
-                transform: rotate(0deg);
-            }
-            25% {
-                transform: rotate(20deg);
-            }
-            75% {
-                transform: rotate(-10deg);
-            }
-        }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
 
-        /* Badges technologiques */
-        .badges {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin: 2rem 0;
-            flex-wrap: wrap;
-            animation: fadeInUp 1s ease 0.6s both;
-        }
+    .nav-links a {
+      color: var(--muted);
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
 
-        .badge {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 0.5rem 1.5rem;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 0.9rem;
-            transition: transform 0.3s ease;
-        }
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      color: var(--text);
+      transform: translateY(-1px);
+    }
 
-        .badge:hover {
-            transform: scale(1.1);
-        }
+    .hero {
+      padding: 48px 0 74px;
+    }
 
-        /* Informations système */
-        .info {
-            margin-top: 2rem;
-            padding: 1rem;
-            background: #f0f0f0;
-            border-radius: 10px;
-            animation: fadeInUp 1s ease 0.9s both;
-        }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 28px;
+      align-items: center;
+    }
 
-        .info p {
-            color: #555;
-            margin: 0.5rem 0;
-            font-family: monospace;
-        }
+    .hero h1 {
+      margin: 0 0 18px;
+      font-size: clamp(2.9rem, 7vw, 5.8rem);
+      line-height: 0.95;
+      letter-spacing: -0.05em;
+    }
 
-        .docker-status {
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            background: #4caf50;
-            border-radius: 50%;
-            margin-right: 10px;
-            animation: pulse 2s infinite;
-        }
+    .hero p {
+      font-size: 1.08rem;
+      color: var(--muted);
+      max-width: 700px;
+      margin: 0 0 26px;
+      line-height: 1.7;
+    }
 
-        @keyframes pulse {
-            0%, 100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-            50% {
-                opacity: 0.5;
-                transform: scale(1.2);
-            }
-        }
+    .hero-actions,
+    .chip-row,
+    .social-row,
+    .stat-grid,
+    .feature-grid,
+    .skill-grid,
+    .timeline,
+    .arch-grid,
+    .project-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
 
-        /* Bouton */
-        .cta-button {
-            margin-top: 2rem;
-            padding: 1rem 2rem;
-            font-size: 1.1rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            animation: fadeInUp 1s ease 1.2s both;
-        }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 18px;
+      border-radius: 14px;
+      font-weight: 700;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      border: 1px solid transparent;
+    }
 
-        .cta-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
+    .button:hover,
+    .button:focus-visible {
+      transform: translateY(-2px);
+    }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+    .button-primary {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #08101d;
+      box-shadow: 0 14px 40px rgba(89, 225, 255, 0.22);
+    }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .card {
-                padding: 2rem;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .greeting {
-                font-size: 1.2rem;
-            }
-            
-            .badges {
-                gap: 0.5rem;
-            }
-            
-            .badge {
-                padding: 0.4rem 1rem;
-                font-size: 0.8rem;
-            }
-        }
-    </style>
+    .button-secondary {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(255,255,255,0.1);
+      color: var(--text);
+    }
+
+    .chip {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--text);
+      font-size: 0.92rem;
+    }
+
+    .hero-card {
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: auto -60px -60px auto;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(89, 225, 255, 0.25), transparent 60%);
+      pointer-events: none;
+    }
+
+    .code-window {
+      border-radius: 18px;
+      background: rgba(7, 11, 22, 0.85);
+      border: 1px solid rgba(255,255,255,0.08);
+      overflow: hidden;
+    }
+
+    .code-head {
+      display: flex;
+      gap: 8px;
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+    }
+
+    .dot:nth-child(1) { background: #ff6b6b; }
+    .dot:nth-child(2) { background: #ffd166; }
+    .dot:nth-child(3) { background: #6cf0b2; }
+
+    pre {
+      margin: 0;
+      padding: 20px;
+      overflow-x: auto;
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: #c8d3ff;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-top: 24px;
+    }
+
+    .stat-card,
+    .feature-card,
+    .skill-card,
+    .project-card,
+    .timeline-card,
+    .arch-card,
+    .contact-card {
+      padding: 22px;
+    }
+
+    .stat-number {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      margin-bottom: 8px;
+      color: var(--primary);
+    }
+
+    .feature-grid,
+    .project-grid,
+    .arch-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .feature-card h3,
+    .project-card h3,
+    .timeline-card h3,
+    .arch-card h3,
+    .contact-card h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 1.08rem;
+    }
+
+    .icon {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      margin-bottom: 16px;
+      font-size: 1.2rem;
+      background: linear-gradient(135deg, rgba(89, 225, 255, 0.16), rgba(155, 123, 255, 0.16));
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--primary);
+    }
+
+    .arch-shell {
+      padding: 28px;
+      overflow: hidden;
+    }
+
+    .diagram {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .diagram-node {
+      padding: 20px;
+      border-radius: 18px;
+      min-height: 150px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      position: relative;
+    }
+
+    .diagram-node strong {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 1rem;
+    }
+
+    .diagram-node small {
+      color: var(--muted);
+      line-height: 1.6;
+      display: block;
+    }
+
+    .diagram-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      font-size: 2rem;
+      opacity: 0.85;
+    }
+
+    .skill-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+    }
+
+    .skill-card {
+      text-align: center;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .skill-card span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-top: 8px;
+      font-weight: 500;
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .timeline-card ul {
+      margin: 12px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .contact-item {
+      padding: 16px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .footer {
+      padding: 34px 0 60px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .footer-line {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.16), transparent);
+      margin-bottom: 24px;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1050px) {
+      .hero-grid,
+      .contact-layout,
+      .timeline,
+      .feature-grid,
+      .project-grid,
+      .arch-grid,
+      .skill-grid,
+      .stat-grid,
+      .diagram {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .section { padding: 74px 0; }
+      .nav { padding: 14px 16px; }
+      .nav-links { display: none; }
+      .hero-grid,
+      .contact-layout,
+      .timeline,
+      .feature-grid,
+      .project-grid,
+      .arch-grid,
+      .skill-grid,
+      .stat-grid,
+      .diagram {
+        grid-template-columns: 1fr;
+      }
+      .hero { padding-top: 24px; }
+      .hero-actions { flex-direction: column; align-items: stretch; }
+      .button { width: 100%; }
+      .diagram-arrow { transform: rotate(90deg); }
+    }
+  </style>
 </head>
 <body>
+  <div class="nav-wrap">
     <div class="container">
-        <div class="card">
-            <div class="docker-logo">
-                🐳
-            </div>
-            <h1>Hello from Docker on AWS</h1>
-            <div class="greeting">
-                How are you today <span>👋</span> <strong>Matteo</strong> ?
-            </div>
-            
-            <div class="badges">
-                <div class="badge">🐳 Docker</div>
-                <div class="badge">☁️ AWS</div>
-                <div class="badge">🚀 Deployed</div>
-                <div class="badge">💻 Container</div>
-            </div>
-            
-            <div class="info">
-                <p>
-                    <span class="docker-status"></span>
-                    Container Status: <strong>Running ✅</strong>
-                </p>
-                <p>📦 Image: nginx:custom</p>
-                <p>🌍 Region: AWS Cloud</p>
-                <p>⏰ Deployed: <span id="timestamp"></span></p>
-            </div>
-            
-            <button class="cta-button" onclick="showMessage()">
-                ✨ Click for a surprise ✨
-            </button>
+      <nav class="nav glass" aria-label="Navigation principale">
+        <a href="#home" class="brand">
+          <span class="brand-badge">MP</span>
+          <span>Matteo PADONOU · Ingénieur Cloud & DevOps</span>
+        </a>
+        <div class="nav-links">
+          <a href="#project">Projet</a>
+          <a href="#architecture">Architecture</a>
+          <a href="#skills">Compétences</a>
+          <a href="#parcours">Valeur</a>
+          <a href="#contact">Contact</a>
         </div>
+      </nav>
+    </div>
+  </div>
+
+  <header id="home" class="hero">
+    <div class="container hero-grid">
+      <div class="reveal visible">
+        <div class="eyebrow">AWS · Terraform · Docker · ECS · CI/CD</div>
+        <h1>Je construis des <span class="gradient-text">infrastructures cloud</span> fiables, automatisées et prêtes pour la production.</h1>
+        <p>
+          Je conçois des architectures AWS résilientes avec une approche orientée disponibilité, sécurité, Infrastructure as Code et industrialisation du déploiement.
+          Mon projet principal met en avant une stack moderne autour d’AWS, Terraform, Docker, ECS Fargate et GitHub Actions.
+        </p>
+
+        <div class="chip-row" aria-label="Technologies clés">
+          <span class="chip">AWS</span>
+          <span class="chip">Terraform</span>
+          <span class="chip">Docker</span>
+          <span class="chip">ECS Fargate</span>
+          <span class="chip">RDS</span>
+          <span class="chip">WAF</span>
+          <span class="chip">GitHub Actions</span>
+        </div>
+
+        <div class="hero-actions" style="margin-top: 26px;">
+          <a class="button button-primary" href="https://github.com/Mahun10/aws-resilient-infra" target="_blank" rel="noopener noreferrer">Voir le projet GitHub</a>
+          <a class="button button-secondary" href="#architecture">Explorer l’architecture</a>
+        </div>
+      </div>
+
+      <div class="hero-card glass reveal">
+        <div class="code-window" aria-label="Extrait Terraform">
+          <div class="code-head">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+<pre><code>terraform {
+  backend "s3" {
+    bucket = "aws-infra-state"
+    key    = "terraform.tfstate"
+    region = "eu-west-3"
+  }
+}
+
+resource "aws_ecs_cluster" "main" {
+  name = "production-cluster"
+}
+
+resource "aws_lb" "app_alb" {
+  load_balancer_type = "application"
+  internal           = false
+}</code></pre>
+        </div>
+      </div>
     </div>
 
-    <script>
-        // Générer des bulles d'arrière-plan aléatoires
-        function createBubble() {
-            const bubble = document.createElement('div');
-            bubble.classList.add('bubble');
-            const size = Math.random() * 100 + 20;
-            bubble.style.width = `${size}px`;
-            bubble.style.height = `${size}px`;
-            bubble.style.left = `${Math.random() * 100}%`;
-            bubble.style.animationDuration = `${Math.random() * 10 + 5}s`;
-            bubble.style.animationDelay = `${Math.random() * 5}s`;
-            document.body.appendChild(bubble);
-            
-            setTimeout(() => {
-                bubble.remove();
-            }, 15000);
+    <div class="container">
+      <div class="stat-grid reveal" aria-label="Indicateurs du projet">
+        <article class="stat-card glass">
+          <div class="stat-number">2 AZ</div>
+          <div class="muted">Architecture pensée pour la haute disponibilité</div>
+        </article>
+        <article class="stat-card glass">
+          <div class="stat-number">IaC</div>
+          <div class="muted">Provisionnement automatisé avec Terraform</div>
+        </article>
+        <article class="stat-card glass">
+          <div class="stat-number">CI/CD</div>
+          <div class="muted">Pipeline GitHub Actions pour industrialiser les déploiements</div>
+        </article>
+        <article class="stat-card glass">
+          <div class="stat-number">Docker</div>
+          <div class="muted">Application conteneurisée et déployée sur ECS Fargate</div>
+        </article>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="project" class="section">
+      <div class="container">
+        <div class="reveal">
+          <div class="eyebrow">Projet principal</div>
+          <h2 class="section-title">Une architecture AWS <span class="gradient-text">résiliente et sécurisée</span></h2>
+          <p class="muted" style="max-width: 800px; line-height: 1.8; margin-top: 0;">
+            Ce projet met en avant une application déployée dans un environnement cloud structuré pour la disponibilité, l’isolation réseau et l’automatisation.
+            L’objectif est de démontrer une compréhension concrète des composants AWS modernes et des bonnes pratiques de déploiement.
+          </p>
+        </div>
+
+        <div class="feature-grid" style="margin-top: 28px;">
+          <article class="feature-card glass reveal">
+            <div class="icon">☁️</div>
+            <h3>ECS Fargate</h3>
+            <p class="muted">Exécution de conteneurs sans gestion directe des serveurs, avec une logique de déploiement plus propre et plus scalable.</p>
+          </article>
+          <article class="feature-card glass reveal">
+            <div class="icon">🛡️</div>
+            <h3>Surface d’attaque réduite</h3>
+            <p class="muted">Accès d’administration via SSM plutôt que SSH exposé publiquement, pour limiter les ouvertures réseau inutiles.</p>
+          </article>
+          <article class="feature-card glass reveal">
+            <div class="icon">🗄️</div>
+            <h3>Backend managé</h3>
+            <p class="muted">Base de données RDS intégrée dans une architecture pensée pour séparer le calcul, les données et la couche d’exposition.</p>
+          </article>
+          <article class="feature-card glass reveal">
+            <div class="icon">⚙️</div>
+            <h3>Pipeline CI/CD</h3>
+            <p class="muted">Déploiement industrialisé avec GitHub Actions, registre ECR et redéploiement du service ECS.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="architecture" class="section">
+      <div class="container">
+        <div class="reveal">
+          <div class="eyebrow">Architecture</div>
+          <h2 class="section-title">Vue d’ensemble <span class="gradient-text">de l’infrastructure</span></h2>
+        </div>
+
+        <div class="arch-shell glass reveal" style="margin-top: 24px;">
+          <div class="diagram" aria-label="Architecture simplifiée">
+            <div class="diagram-node">
+              <strong>Internet / Utilisateur</strong>
+              <small>Les requêtes publiques arrivent sur un point d’entrée unique conçu pour distribuer le trafic proprement.</small>
+            </div>
+            <div class="diagram-arrow">→</div>
+            <div class="diagram-node">
+              <strong>Application Load Balancer</strong>
+              <small>Répartition du trafic, contrôle de santé et intégration avec les services applicatifs déployés sur AWS.</small>
+            </div>
+
+            <div class="diagram-node">
+              <strong>ECS Fargate</strong>
+              <small>Exécution du conteneur applicatif dans des sous-réseaux privés, avec une logique adaptée aux déploiements modernes.</small>
+            </div>
+            <div class="diagram-arrow">→</div>
+            <div class="diagram-node">
+              <strong>RDS / Services managés</strong>
+              <small>Persistance des données dans une couche distincte pour éviter le couplage fort entre calcul et stockage.</small>
+            </div>
+
+            <div class="diagram-node">
+              <strong>Terraform State</strong>
+              <small>État centralisé dans S3 avec verrouillage via DynamoDB pour sécuriser et fiabiliser l’Infrastructure as Code.</small>
+            </div>
+            <div class="diagram-arrow">→</div>
+            <div class="diagram-node">
+              <strong>GitHub Actions + ECR</strong>
+              <small>Build, push d’image et mise à jour du service pour rendre le déploiement reproductible et traçable.</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="arch-grid" style="margin-top: 22px;">
+          <article class="arch-card glass reveal">
+            <h3>Disponibilité</h3>
+            <p class="muted">Répartition multi-AZ et logique orientée continuité de service en cas d’incident sur une zone.</p>
+          </article>
+          <article class="arch-card glass reveal">
+            <h3>Sécurité</h3>
+            <p class="muted">Segmentation réseau, exposition contrôlée, gestion d’accès plus propre et réduction des accès directs.</p>
+          </article>
+          <article class="arch-card glass reveal">
+            <h3>Industrialisation</h3>
+            <p class="muted">Infrastructure versionnée, automatisée et reproductible grâce à Terraform et au pipeline CI/CD.</p>
+          </article>
+          <article class="arch-card glass reveal">
+            <h3>Modernisation</h3>
+            <p class="muted">Conteneurisation de l’application et usage de services managés pour accélérer la mise en production.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="section">
+      <div class="container">
+        <div class="reveal">
+          <div class="eyebrow">Compétences</div>
+          <h2 class="section-title">Les briques <span class="gradient-text">mobilisées</span></h2>
+        </div>
+
+        <div class="skill-grid" style="margin-top: 26px;">
+          <article class="skill-card glass reveal">AWS<span>Compute, réseau, services managés</span></article>
+          <article class="skill-card glass reveal">Terraform<span>Infrastructure as Code</span></article>
+          <article class="skill-card glass reveal">Docker<span>Conteneurisation applicative</span></article>
+          <article class="skill-card glass reveal">ECS Fargate<span>Déploiement de conteneurs</span></article>
+          <article class="skill-card glass reveal">RDS<span>Couche de données managée</span></article>
+          <article class="skill-card glass reveal">GitHub Actions<span>CI/CD et automatisation</span></article>
+          <article class="skill-card glass reveal">Linux<span>Administration et exploitation</span></article>
+          <article class="skill-card glass reveal">SSM<span>Accès d’administration sécurisé</span></article>
+          <article class="skill-card glass reveal">WAF<span>Protection de la surface web</span></article>
+          <article class="skill-card glass reveal">Sécurité cloud<span>Durcissement et bonnes pratiques</span></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="parcours" class="section">
+      <div class="container">
+        <div class="reveal">
+          <div class="eyebrow">Valeur ajoutée</div>
+          <h2 class="section-title">Compétences <span class="gradient-text">mises en pratique</span></h2>
+        </div>
+
+        <div class="timeline" style="margin-top: 26px;">
+          <article class="timeline-card glass reveal">
+            <h3>Approche orientée production</h3>
+            <ul>
+              <li>Compréhension de la disponibilité et de la résilience.</li>
+              <li>Choix d’une architecture plus propre qu’un simple serveur public unique.</li>
+              <li>Usage d’outils concrets du cloud moderne.</li>
+            </ul>
+          </article>
+          <article class="timeline-card glass reveal">
+            <h3>Approche orientée automatisation</h3>
+            <ul>
+              <li>Provisionnement reproductible avec Terraform.</li>
+              <li>Chaîne de déploiement industrialisée.</li>
+              <li>Capacité à versionner l’infrastructure comme du code.</li>
+            </ul>
+          </article>
+          <article class="timeline-card glass reveal">
+            <h3>Approche orientée sécurité</h3>
+            <ul>
+              <li>Réduction des accès directs inutiles.</li>
+              <li>Sensibilité aux principes de moindre exposition et de segmentation.</li>
+              <li>Vision cloud mêlant exploitation et sécurité.</li>
+            </ul>
+          </article>
+          <article class="timeline-card glass reveal">
+            <h3>Approche orientée progression</h3>
+            <ul>
+              <li>Capacité à construire un projet cohérent de bout en bout.</li>
+              <li>Volonté de documenter, expliquer et valoriser le travail réalisé.</li>
+              <li>Base solide pour évoluer vers des rôles Cloud, DevOps ou sécurité cloud.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="container">
+        <div class="contact-layout">
+          <article class="contact-card glass reveal">
+            <div class="eyebrow">Contact</div>
+            <h2 class="section-title" style="font-size: clamp(2rem, 4vw, 3rem);">Discutons de <span class="gradient-text">cloud, DevOps et architecture</span></h2>
+            <p class="muted" style="line-height: 1.8;">
+              Je recherche des opportunités où je peux contribuer sur des sujets d’infrastructure, d’automatisation, de conteneurisation et de sécurité cloud.
+            </p>
+
+            <div class="contact-list">
+              <div class="contact-item">
+                <strong>GitHub</strong>
+                <div class="muted" style="margin-top: 6px;">
+                  <a href="https://github.com/Mahun10" target="_blank" rel="noopener noreferrer">github.com/Mahun10</a>
+                </div>
+              </div>
+              <div class="contact-item">
+                <strong>Projet principal</strong>
+                <div class="muted" style="margin-top: 6px;">
+                  <a href="https://github.com/Mahun10/aws-resilient-infra" target="_blank" rel="noopener noreferrer">aws-resilient-infra</a>
+                </div>
+              </div>
+              <div class="contact-item">
+                <strong>LinkedIn</strong>
+                <div class="muted" style="margin-top: 6px;">
+                  <a href="https://www.linkedin.com/in/matteo-padonou-a42059360" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-line"></div>
+      <div class="muted">© 2026 Mahun · Portfolio Cloud & DevOps · Conçu en HTML, CSS et JavaScript natif.</div>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
         }
-        
-        // Créer des bulles toutes les 500ms
-        setInterval(createBubble, 500);
-        
-        // Afficher la date et l'heure actuelles
-        const now = new Date();
-        const formattedDate = now.toLocaleString('fr-FR', {
-            day: '2-digit',
-            month: '2-digit',
-            year: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit'
-        });
-        document.getElementById('timestamp').textContent = formattedDate;
-        
-        // Fonction pour le bouton surprise
-        function showMessage() {
-            const messages = [
-                "🎉 Docker is awesome! 🎉",
-                "🚀 You're running on AWS! 🚀",
-                "💪 Matteo, you're crushing it! 💪",
-                "🌟 Containerization is magic! 🌟",
-                "🎈 Thanks for deploying me! 🎈",
-                "🐳 Whales are cool, just like Docker! 🐳"
-            ];
-            
-            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-            alert(randomMessage);
-            
-            // Animation supplémentaire
-            const button = document.querySelector('.cta-button');
-            button.style.transform = 'scale(0.95)';
-            setTimeout(() => {
-                button.style.transform = 'scale(1)';
-            }, 200);
-        }
-        
-        // Animation au chargement
-        window.addEventListener('load', () => {
-            console.log('🚀 Site Docker AWS chargé avec succès !');
-        });
-    </script>
+      });
+    }, { threshold: 0.14 });
+
+    document.querySelectorAll('.reveal').forEach((el, index) => {
+      if (!el.classList.contains('visible')) {
+        el.style.transitionDelay = `${Math.min(index * 40, 240)}ms`;
+      }
+      observer.observe(el);
+    });
+  </script>
 </body>
 </html>

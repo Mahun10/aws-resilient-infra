@@ -13,3 +13,6 @@ crash.log
 # Bootstrap Terraform
 bootstrap/.terraform/
 bootstrap/*.tfstate*
+
+# Portfolio html
+*.html
