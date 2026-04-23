@@ -92,5 +92,5 @@ resource "aws_ecs_service" "app" {
     container_port   = 80
   }
 
-  depends_on = [aws_lb_listener.http_ecs_test]
+  depends_on = [aws_lb_listener.https]
 }
