@@ -62,18 +62,6 @@ resource "aws_lb_listener" "https" {
   }
 }
 
-resource "aws_lb" "app_alb" {
-  name               = "${var.project_name}-alb"
-  internal           = false
-  load_balancer_type = "application"
-  security_groups    = [aws_security_group.alb_sg.id]
-  subnets            = [aws_subnet.public_1.id, aws_subnet.public_2.id]
-
-  tags = {
-    Name = "${var.project_name}-alb"
-  }
-}
-
 resource "aws_lb_target_group" "app_tg" {
   name     = "${var.project_name}-tg"
   port     = 80
