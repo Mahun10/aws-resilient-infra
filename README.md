@@ -22,7 +22,7 @@
 * [CI/CD Pipeline (GitHub Actions)](#-cicd-pipeline-github-actions)
 * [Monitoring & Observability](#-monitoring--observability)
 * [Security Best Practices](#%EF%B8%8F-security-best-practices)
-* [HTTPS (Not Implemented)](#-https-not-implemented)
+* [HTTPS](#-https-not-implemented)
 * [What I Learned](#-what-i-learned)
 * [Author](#%E2%80%8D-author)
 
