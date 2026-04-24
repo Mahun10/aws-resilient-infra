@@ -154,7 +154,7 @@ It triggers 500 asynchronous web requests toward the Application Load Balancer (
 ```powershell
 for ($i = 0; $i -lt 500; $i++) {
     Start-Job {
-        Invoke-WebRequest -Uri "[http://resilient-aws-infra-alb-828325941.eu-west-3.elb.amazonaws.com](http://resilient-aws-infra-alb-828325941.eu-west-3.elb.amazonaws.com)" -UseBasicParsing | Out-Null
+        Invoke-WebRequest -Uri "[http://resilient-aws-infra-alb-xxxxxxxx.eu-west-3.elb.amazonaws.com](http://resilient-aws-infra-alb-xxxxxx.eu-west-3.elb.amazonaws.com)" -UseBasicParsing | Out-Null
     }
 }
 ```
