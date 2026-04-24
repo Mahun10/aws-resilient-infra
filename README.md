@@ -355,6 +355,7 @@ HTTPS has been implemented in this project.
 
 The application is now accessible securely over HTTPS, with TLS termination handled by the Application Load Balancer.
 
+![https](images/https.png)
 
 ## 🎓 What I Learned
 
