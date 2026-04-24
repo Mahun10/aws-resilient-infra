@@ -1,18 +1,48 @@
+# =========================
 # Terraform
-*.tfplan
+# =========================
+.terraform/
+.terraform.lock.hcl
+
 *.tfstate
 *.tfstate.*
-.terraform/
+*.tfplan
+*.plan
 
-# Variables sensibles
+crash.log
+crash.*.log
+
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Variables / secrets
 *.tfvars
+*.tfvars.json
+terraform.tfvars
 
-# Backup files
-*.bak
+# Local CLI config (peut contenir creds)
+.terraformrc
+terraform.rc
 
-# Bootstrap Terraform
+# =========================
+# Bootstrap
+# =========================
 bootstrap/.terraform/
 bootstrap/*.tfstate*
 
-# Portfolio html
-*.html
+# =========================
+# Backup / editor junk
+# =========================
+*.bak
+*.swp
+*.tmp
+.DS_Store
+Thumbs.db
+
+# =========================
+# Optional (si Python tooling)
+# =========================
+__pycache__/
+*.pyc
