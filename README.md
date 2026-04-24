@@ -339,20 +339,21 @@ Sensitive values are stored in GitHub Secrets:
 
 ---
 
-## 🔐 HTTPS (Not Implemented)
+## 🔐 HTTPS
 
-HTTPS is not implemented in this project.
+HTTPS has been implemented in this project.
 
-### Reason
+### Implementation
 
-This infrastructure is designed as a **demonstration environment** and is not intended to be maintained long-term.
+- TLS certificate provisioned with AWS Certificate Manager (ACM)
+- DNS validation configured through Cloudflare
+- HTTPS listener configured on the Application Load Balancer
+- HTTP traffic redirected automatically to HTTPS
+- Public access available through `www.matteocloudflow.com`
 
-### Planned improvement
+### Result
 
-- TLS via AWS Certificate Manager (ACM)
-- HTTPS listener on ALB
-- HTTP → HTTPS redirection
-
+The application is now accessible securely over HTTPS, with TLS termination handled by the Application Load Balancer.
 
 
 ## 🎓 What I Learned
