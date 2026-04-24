@@ -1,8 +1,8 @@
 # Terraform
-.terraform/
+*.tfplan
 *.tfstate
 *.tfstate.*
-crash.log
+.terraform/
 
 # Variables sensibles
 *.tfvars
