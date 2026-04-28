@@ -46,7 +46,6 @@ The architecture follows modern cloud best practices:
 The project evolved from an EC2-based architecture to a **fully containerized deployment**, improving scalability and reducing operational overhead.
 
 
-
 ## 🏗️ Architecture
 
 
@@ -353,9 +352,9 @@ HTTPS has been implemented in this project.
 
 ### Note
 
-Infrastructure was intentionally decommissioned after validation to optimize cloud costs.
-Deployment and security validation screenshots are included as evidence of successful end-to-end functionality.
+The live application is no longer publicly accessible because the AWS infrastructure was intentionally decommissioned after validation to avoid ongoing cloud costs.
 
+Screenshots of the live HTTPS deployment and AWS WAF security validation are included below as evidence that the infrastructure was successfully deployed, tested, and functional.
 ### Result
 
 The application is now accessible securely over HTTPS, with TLS termination handled by the Application Load Balancer.
