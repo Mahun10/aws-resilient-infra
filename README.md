@@ -383,7 +383,7 @@ The application is accessible securely over HTTPS, with TLS termination handled 
 - Applying DevOps and cloud best practices
 
 
-## Futur improvement
+## Futur Improvement
 Implement ECS Service Auto Scaling based on CPU and memory utilization
 
 
