@@ -24,7 +24,7 @@
 * [Security Best Practices](#%EF%B8%8F-security-best-practices)
 * [HTTPS](#-https)
 * [What I Learned](#-what-i-learned)
-* [Improvement] (#future-improvement)
+* [Improvement](#future-improvement)
 * [Author](#%E2%80%8D-author)
 
 ---
