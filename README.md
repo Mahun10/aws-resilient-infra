@@ -357,7 +357,7 @@ The application is accessible securely over HTTPS, with TLS termination handled 
 
 ![https](images/https.png)
 
-### Notes
+## Notes
 
 The live application is no longer publicly accessible because the AWS infrastructure was intentionally decommissioned after validation to avoid ongoing cloud costs.
 
