@@ -350,6 +350,12 @@ HTTPS has been implemented in this project.
 - HTTP traffic redirected automatically to HTTPS
 - Public access available through `www.matteocloudflow.com`
 
+## Important
+
+The live application is no longer publicly accessible because the AWS infrastructure was intentionally decommissioned after validation to avoid ongoing cloud costs.
+
+Screenshots of the live HTTPS deployment is included below as evidence that the infrastructure was successfully deployed, tested, and functional.
+
 
 ### Result
 
@@ -357,11 +363,7 @@ The application is accessible securely over HTTPS, with TLS termination handled 
 
 ![https](images/https.png)
 
-## Notes
 
-The live application is no longer publicly accessible because the AWS infrastructure was intentionally decommissioned after validation to avoid ongoing cloud costs.
-
-Screenshots of the live HTTPS deployment is included below as evidence that the infrastructure was successfully deployed, tested, and functional.
 
 ## 🎓 What I Learned
 
