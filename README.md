@@ -41,7 +41,8 @@ The architecture follows modern cloud best practices:
 - Image storage with **Amazon ECR**  
 - Layer 7 protection using **AWS WAF**  
 - Managed database (RDS)  
-- Monitoring, alerting and auditing  
+- Monitoring, alerting and auditing
+- HTTPS 
 
 The project evolved from an EC2-based architecture to a **fully containerized deployment**, improving scalability and reducing operational overhead.
 
@@ -63,6 +64,7 @@ The project evolved from an EC2-based architecture to a **fully containerized de
 - **CloudTrail** for auditing  
 - **AWS WAF** for Layer 7 protection  
 - **SSM Session Manager** (no SSH access required)
+- **HTTPS**
 
 
 
