@@ -351,6 +351,11 @@ HTTPS has been implemented in this project.
 - HTTP traffic redirected automatically to HTTPS
 - Public access available through `www.matteocloudflow.com`
 
+### Note
+
+Infrastructure was intentionally decommissioned after validation to optimize cloud costs.
+Deployment and security validation screenshots are included as evidence of successful end-to-end functionality.
+
 ### Result
 
 The application is now accessible securely over HTTPS, with TLS termination handled by the Application Load Balancer.
