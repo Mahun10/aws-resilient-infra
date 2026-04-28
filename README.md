@@ -359,11 +359,11 @@ Screenshots of the live HTTPS deployment is included below as evidence that the 
 
 ### Result
 
-The application is accessible securely over HTTPS, with TLS termination handled by the Application Load Balancer.
+
 
 ![https](images/https.png)
 
-
+The application is accessible securely over HTTPS, with TLS termination handled by the Application Load Balancer.
 
 ## 🎓 What I Learned
 
