@@ -350,7 +350,7 @@ HTTPS has been implemented in this project.
 - HTTP traffic redirected automatically to HTTPS
 - Public access available through `www.matteocloudflow.com`
 
-### Note
+### Notes
 
 The live application is no longer publicly accessible because the AWS infrastructure was intentionally decommissioned after validation to avoid ongoing cloud costs.
 
