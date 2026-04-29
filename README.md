@@ -142,7 +142,7 @@ Containers also provide:
 - Faster updates and rollouts  
 - Simplified application lifecycle management  
 
-Because the application is packaged as a Docker image, *updates can be deployed rapidly* by pushing a new image to **ECR** and triggering a new deployment in **ECS**.
+Because the application is packaged as a Docker image, **updates can be deployed rapidly** by pushing a new image to **ECR** and triggering a new deployment in **ECS**.
 
 ---
 
