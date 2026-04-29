@@ -433,7 +433,7 @@ Implement ECS Service Auto Scaling based on users'requests
  
 
 
-Matteo PADONOU –  Cloud & DevOps junior Engineer 
+Matteo PADONOU –  Cloud Security & DevOps junior Engineer 
 
 
 
