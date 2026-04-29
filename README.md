@@ -114,6 +114,9 @@ The service indicates that the scaling operation succeeded and increases the num
 
 ## The architecture was later **migrated to ECS Fargate**
 
+
+![Docker Architecture](images/Docker_architecture.png)
+
 ### Why migrate from EC2 to containers?
 
 I chose to move from EC2-based workloads to containers running on **ECS Fargate** for several reasons.
@@ -143,7 +146,6 @@ Because the application is packaged as a Docker image, updates can be deployed r
 
 Containerized architecture:
 
-![Docker Architecture](images/Docker_architecture.png)
 
 ---
 
