@@ -73,45 +73,46 @@ The project evolved from an EC2-based architecture to a **fully containerized de
 
 ## 🔄 Architecture Evolution
 
-The initial version of the infrastructure was based on EC2 instances managed by an Auto Scaling Group.
+## Initial architecture based on EC2 and Auto Scaling
 
-- EC2 instances deployed in private subnets  
-- Auto Scaling Group based on CPU utilization  
-- ALB distributing traffic to EC2 instances
+The first version of the infrastructure was built on **EC2 instances managed by an Auto Scaling Group**, before being later migrated to containers.
 
+### Why EC2 initially?
+
+As a first design choice, I wanted to host a web application directly on EC2 instances using **Nginx** as the web server.
+
+Nginx was installed on each instance to serve the application, while the architecture was designed around two main objectives:
+
+## Security and resilience
+To secure and harden the infrastructure:
+
+- EC2 instances were deployed in **private subnets**, reducing direct exposure to the Internet  
+- An **Application Load Balancer (ALB)** acted as the single public entry point and distributed traffic across instances  
+- Multi-AZ deployment improved availability and fault tolerance  
+
+## Elasticity and traffic management
+To handle variations in user traffic:
+
+- An **Auto Scaling Group** dynamically adjusted the number of EC2 instances  
+- Scaling policies were based on **CPU utilization thresholds**
+
+Architecture overview:
 
 ![AWS Architecture](images/architecture.png)
 
-### Auto scaling
+---
 
-Initially, the infrastructure runs with two instances.
+# Auto Scaling demonstration
 
-![Instances default number](images/2_Instances.png)
+Initially, the infrastructure runs with **two EC2 instances**:
 
+![Default number of instances](images/2_Instances.png)
 
+To simulate high traffic and CPU load, the following command was used:
 
-To simulate high traffic and CPU consumption, we used the command `stress --cpu 2 --timeout 600`.
-
-This command launches two CPU worker threads (`--cpu 2`) in order to generate processor load for 600 seconds (`--timeout 600`), which corresponds to 10 minutes.
-
-![Command Stress](images/stress_command.png)
-
-
-At the same time, CPU utilization can be monitored in real time through Amazon CloudWatch.
-
-Once CPU utilization exceeds the configured threshold of 50%, the auto scaling policy is triggered and new instances begin to launch automatically.
-
-![Command Stress](images/Alarmes_CPU.png)
-
-![Build third instances](images/creation_3eme_instance.png)
-
-![third instances](images/3eme_instance.png)
-
-The service indicates that the scaling operation succeeded and increases the number of running instances from 2 to 4 in order to handle the additional load.
-
-![notif auto scaling starting](images/notification_auto_scaling.png)
-
-
+```bash
+stress --cpu 2 --timeout 600
+```
 ## The architecture was later **migrated to ECS Fargate**
 
 
