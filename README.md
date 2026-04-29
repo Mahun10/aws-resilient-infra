@@ -418,7 +418,7 @@ The application is accessible securely over HTTPS, with TLS termination handled 
 
 
 ## Futur Improvement
-Implement ECS Service Auto Scaling based on CPU and memory utilization
+Implement ECS Service Auto Scaling based on users'requests
 
 
 ---
