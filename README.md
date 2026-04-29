@@ -112,34 +112,73 @@ The service indicates that the scaling operation succeeded and increases the num
 ![notif auto scaling starting](images/notification_auto_scaling.png)
 
 
-## The architecture was later **migrated to ECS Fargate**:
+## The architecture was later **migrated to ECS Fargate**
 
-Why ? 
+### Why migrate from EC2 to containers?
 
-I have made the choice to prefer containers techno instead of EC2 first because i have a simple web page to run and so i defined that it is not necessary to me to have a whole access control on vm ressources, i will not integrate SIEM for instance . 
-Secondly, Based on my activities ECS is cheapier than EC2. 
+I chose to move from EC2-based workloads to containers running on **ECS Fargate** for several reasons.
 
-![Docker](images/cost.png)
+### 1. Simplicity and operational efficiency
+Because the application is a lightweight static web application, running dedicated virtual machines was unnecessary. Full control over operating system resources was not required for this use case, and advanced host-level integrations (such as SIEM agents or custom OS hardening) were outside the project scope.
 
-![Docker](images/Docker_architecture.png)
-  
-Besides, Containers offers a light avantages to deploy quickly app, below the demo : 
+Using **Fargate** allowed me to focus on the application rather than managing servers, patching hosts, or handling capacity planning.
 
-![Docker](images/ECS_inital_state.png)
+---
 
-![Docker](images/initial_webpage.png)
+### 2. Cost efficiency
+For this workload, **ECS Fargate proved more cost-effective than maintaining EC2 instances**, especially for a small application with moderate and predictable usage.
 
-![Docker](images/update_html.png)
+![Cost Comparison](images/cost.png)
 
-![Docker](images/reaction_ecs_part1.png)
+---
 
-![Docker](images/reaction_ecs_part2.png)
+### 3. Container portability and faster deployments
+Containers also provide:
+- Reproducible deployments  
+- Portable workloads  
+- Faster updates and rollouts  
+- Simplified application lifecycle management  
 
-![Docker](images/reaction_ecs_part3.png)
+Because the application is packaged as a Docker image, updates can be deployed rapidly by pushing a new image to **ECR** and triggering a new deployment in **ECS**.
 
-![Docker](images/changes_appearweb.png)
+Containerized architecture:
 
+![Docker Architecture](images/Docker_architecture.png)
 
+---
+
+## Deployment update demonstration
+
+The screenshots below show a simple application update workflow:
+1. Initial ECS service state  
+2. Initial web page deployed  
+3. HTML modification  
+4. ECS rolling deployment reaction  
+5. Updated content visible in production  
+
+Initial ECS state:
+
+![ECS Initial State](images/ECS_inital_state.png)
+
+Initial application:
+
+![Initial Web Page](images/initial_webpage.png)
+
+Application update:
+
+![HTML Update](images/update_html.png)
+
+Rolling deployment:
+
+![Deployment Part 1](images/reaction_ecs_part1.png)
+
+![Deployment Part 2](images/reaction_ecs_part2.png)
+
+![Deployment Part 3](images/reaction_ecs_part3.png)
+
+Updated application in production:
+
+![Updated Web Page](images/changes_appearweb.png)
 
 ## 🧱 Web Application Firewall (AWS WAF)
 
