@@ -73,7 +73,7 @@ The project evolved from an EC2-based architecture to a **fully containerized de
 
 ## 🔄 Architecture Evolution
 
-## Initial architecture based on EC2 and Auto Scaling
+## Initial architecture based on EC2 
 
 The first version of the infrastructure was built on **EC2 instances managed by an Auto Scaling Group**, before being later migrated to containers.
 
