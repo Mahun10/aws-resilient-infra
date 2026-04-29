@@ -118,11 +118,16 @@ The service indicates that the scaling operation succeeded and increases the num
 - Deployment via ECS Service  
 - No server management required
 
-![Docker](images/Docker_architecture.png)
+![Docker](images/initial_state.png)
 
-![Docker](images/creation_containers.png)
+![Docker](images/new_containers.png)
 
-![Docker](images/creation_containers_completed.png)
+![Docker](images/substitution_container_part1.png)
+
+![Docker](images/substitution_container_part2.png)
+
+![Docker](images/substitution_container_part3.png)
+
 
 👉 This transition improved scalability, flexibility, and reduced operational overhead.
 
