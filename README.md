@@ -90,29 +90,12 @@ To secure and harden the infrastructure:
 - An **Application Load Balancer (ALB)** acted as the single public entry point and distributed traffic across instances  
 - Multi-AZ deployment improved availability and fault tolerance  
 
-## Elasticity and traffic management
-To handle variations in user traffic:
-
-- An **Auto Scaling Group** dynamically adjusted the number of EC2 instances  
-- Scaling policies were based on **CPU utilization thresholds**
-
 Architecture overview:
 
 ![AWS Architecture](images/architecture.png)
 
 ---
 
-# Auto Scaling demonstration
-
-Initially, the infrastructure runs with **two EC2 instances**:
-
-![Default number of instances](images/2_Instances.png)
-
-To simulate high traffic and CPU load, the following command was used:
-
-```bash
-stress --cpu 2 --timeout 600
-```
 ## The architecture was later **migrated to ECS Fargate**
 
 
