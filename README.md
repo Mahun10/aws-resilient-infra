@@ -12,8 +12,8 @@
 * [Architecture](#architecture)
     * [Key Components](#key-components)
 * [Architecture Evolution](#-architecture-evolution)
-    * [Auto Scaling & Stress Tests](#auto-scaling)
-    * [Migration to ECS Fargate](#the-architecture-was-later-migrated-to-ecs-fargate)
+    
+    * [From EC2 to ECS Fargate](#the-architecture-was-later-migrated-to-ecs-fargate)
 * [Web Application Firewall (AWS WAF)](#-web-application-firewall-aws-waf)
     * [Implemented Rules](#implemented-rules)
     * [Attack Simulation Results](#results)
