@@ -139,10 +139,6 @@ Besides, Containers offers a light avantages to deploy quickly app, below the de
 
 ![Docker](images/changes_appearweb.png)
 
-![Docker](images/substitution_container_part3.png)
-
-
-
 
 
 ## 🧱 Web Application Firewall (AWS WAF)
