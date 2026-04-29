@@ -114,9 +114,15 @@ The service indicates that the scaling operation succeeded and increases the num
 
 ## The architecture was later **migrated to ECS Fargate**:
 
-- Containerized application (Docker)  
-- Deployment via ECS Service  
-- No server management required
+Why ? 
+
+I have made the choice to prefer containers techno instead of EC2 first because i have a simple web page to run and so i defined that it is not necessary to me to have a whole access control on vm ressources, i will not integrate SIEM for instance . 
+Secondly, Based on my activities ECS is cheapier than EC2. 
+
+
+![Docker](images/Docker_architecture.png)
+  
+Besides, Containers offers a light avantages to deploy quickly app, below the demo : 
 
 ![Docker](images/initial_state.png)
 
@@ -129,7 +135,6 @@ The service indicates that the scaling operation succeeded and increases the num
 ![Docker](images/substitution_container_part3.png)
 
 
-👉 This transition improved scalability, flexibility, and reduced operational overhead.
 
 
 
