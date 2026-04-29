@@ -119,21 +119,27 @@ Why ?
 I have made the choice to prefer containers techno instead of EC2 first because i have a simple web page to run and so i defined that it is not necessary to me to have a whole access control on vm ressources, i will not integrate SIEM for instance . 
 Secondly, Based on my activities ECS is cheapier than EC2. 
 
+![Docker](images/cost.png)
 
 ![Docker](images/Docker_architecture.png)
   
 Besides, Containers offers a light avantages to deploy quickly app, below the demo : 
 
-![Docker](images/initial_state.png)
+![Docker](images/ECS_inital_state.png)
 
-![Docker](images/new_containers.png)
+![Docker](images/initial_webpage.png)
 
-![Docker](images/substitution_container_part1.png)
+![Docker](images/update_html.png)
 
-![Docker](images/substitution_container_part2.png)
+![Docker](images/reaction_ecs_part1.png)
+
+![Docker](images/reaction_ecs_part2.png)
+
+![Docker](images/reaction_ecs_part3.png)
+
+![Docker](images/changes_appearweb.png)
 
 ![Docker](images/substitution_container_part3.png)
-
 
 
 
