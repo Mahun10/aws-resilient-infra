@@ -92,7 +92,7 @@ To secure and harden the infrastructure:
 
 Architecture overview:
 
-![AWS Architecture](images/architecture.png)
+![AWS Architecture](images/diagram_vpc_ec2.png)
 
 ---
 
