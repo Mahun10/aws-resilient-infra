@@ -94,6 +94,8 @@ Architecture overview:
 
 ![AWS Architecture](images/diagram_vpc_ec2.png)
 
+![AWS SSM](images/SSM.png)
+
 ---
 
 ## The architecture was later **migrated to ECS Fargate**
@@ -162,6 +164,11 @@ Rolling deployment:
 Updated application in production:
 
 ![Updated Web Page](images/changes_appearweb.png)
+
+## CloudTrail
+
+![Cloudtrail](images/CloudTrail_events.png)
+
 
 ## 🧱 Web Application Firewall (AWS WAF)
 
