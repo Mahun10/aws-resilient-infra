@@ -185,6 +185,16 @@ Updated application in production:
 
 ![Updated Web Page](images/changes_appearweb.png)
 
+## IAM
+
+I configured dedicated IAM identities for different use cases:
+
+- A Terraform identity used to provision and manage infrastructure  
+- An identity for pushing Docker images to Amazon ECR  
+
+This separation follows the principle of **least privilege**, ensuring that each component only has the permissions required for its function and reducing the impact of a potential compromise.
+
+
 ## CloudTrail
 
 CloudTrail was configured to monitor and log all API activity across the AWS environment.
