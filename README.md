@@ -12,8 +12,9 @@
 * [Architecture](#architecture)
     * [Key Components](#key-components)
 * [Architecture Evolution](#-architecture-evolution)
-    
+    * [Initial architecture based on EC2](#initial-architecture-based-on-ec2)
     * [From EC2 to ECS Fargate](#the-architecture-was-later-migrated-to-ecs-fargate)
+* [CloudTrail](#cloudtrail)
 * [Web Application Firewall (AWS WAF)](#-web-application-firewall-aws-waf)
     * [Implemented Rules](#implemented-rules)
     * [Attack Simulation Results](#results)
