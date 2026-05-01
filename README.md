@@ -99,7 +99,7 @@ Architecture overview:
 ## The architecture was later **migrated to ECS Fargate**
 
 
-![Docker Architecture](images/Docker_architecture.png)
+![Docker Architecture](images/diagram-ECS.png)
 
 ### Why migrate from EC2 to containers?
 
