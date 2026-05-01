@@ -106,11 +106,11 @@ opening port 22, which increases the attack surface
 
 By using SSM:
 
-instances can remain in private subnets with no public IP
+Instances can remain in private subnets with no public IP
 no inbound ports (including SSH) need to be opened
 access is performed securely through the AWS control plane
 
-To connect to an instance, the user interacts with the SSM service, which communicates with the SSM Agent running on the instance.
+To connect to an instance, I interact with the SSM service, which communicates with the SSM Agent running on the instance
 
 
 ![AWS SSM](images/SSM.png)
@@ -186,8 +186,13 @@ Updated application in production:
 
 ## CloudTrail
 
-I set up cloudtrail to have view of who made an actions into the VPC. 
-I defined IAM, role and service account with specific least privilge 
+CloudTrail was configured to monitor and log all API activity across the AWS environment.
+
+In this project, it allows:
+
+tracking who performed actions on the infrastructure (e.g., resource creation, modification, or deletion)
+detecting configuration changes within the VPC and associated services
+
 ![Cloudtrail](images/CloudTrail_events.png)
 
 
