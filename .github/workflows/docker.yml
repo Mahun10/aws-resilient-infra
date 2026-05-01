@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - labo
     paths:
       - "app/**"
       - ".github/workflows/docker.yml"
@@ -13,15 +14,18 @@ jobs:
   docker:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+      id-token: write
+
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v2
+      - name: Configure AWS credentials with OIDC
+        uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: ${{ secrets.AWS_ECR_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_ECR_SECRET_ACCESS_KEY }}
+          role-to-assume: arn:aws:iam::591127499740:role/github-actions-ecr-role
           aws-region: eu-west-3
 
       - name: Login to ECR
@@ -46,4 +50,4 @@ jobs:
             --cluster resilient-aws-infra-ecs-cluster \
             --service resilient-aws-infra-ecs-service \
             --force-new-deployment \
-            --region eu-west-3 
+            --region eu-west-3
