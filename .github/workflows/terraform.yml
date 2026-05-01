@@ -11,7 +11,7 @@ on:
   push:
     branches:
       - main
-      - https_integration
+      - labo
     paths:
       - "*.tf"
       - "**/*.tf"
