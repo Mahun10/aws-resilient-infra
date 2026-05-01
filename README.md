@@ -83,6 +83,11 @@ As a first design choice, I wanted to host a web application directly on EC2 ins
 
 Nginx was installed on each instance to serve the application, while the architecture was designed around two main objectives:
 
+Architecture overview:
+
+![AWS Architecture](images/diagram_vpc_ec2.png)
+
+
 ## Security and resilience
 To secure and harden the infrastructure:
 
@@ -90,9 +95,23 @@ To secure and harden the infrastructure:
 - An **Application Load Balancer (ALB)** acted as the single public entry point and distributed traffic across instances  
 - Multi-AZ deployment improved availability and fault tolerance  
 
-Architecture overview:
+### Secure Access with AWS Systems Manager (SSM)
 
-![AWS Architecture](images/diagram_vpc_ec2.png)
+Instead of using SSH for instance access, AWS Systems Manager (SSM) was configured.
+
+Traditional SSH access requires:
+
+exposing instances to the Internet via a public IP address
+opening port 22, which increases the attack surface
+
+By using SSM:
+
+instances can remain in private subnets with no public IP
+no inbound ports (including SSH) need to be opened
+access is performed securely through the AWS control plane
+
+To connect to an instance, the user interacts with the SSM service, which communicates with the SSM Agent running on the instance.
+
 
 ![AWS SSM](images/SSM.png)
 
@@ -167,6 +186,8 @@ Updated application in production:
 
 ## CloudTrail
 
+I set up cloudtrail to have view of who made an actions into the VPC. 
+I defined IAM, role and service account with specific least privilge 
 ![Cloudtrail](images/CloudTrail_events.png)
 
 
