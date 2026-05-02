@@ -213,7 +213,7 @@ detecting configuration changes within the VPC and associated services
 
 ## 🧱 Web Application Firewall (AWS WAF)
 
-An AWS WAF Web ACL is deployed and attached to the Application Load Balancer to protect the application from Layer 7 attacks.
+An AWS WAF Web ACL was deployed and attached to the Application Load Balancer to protect the application from Layer 7 attacks.
 
 ### Implemented Rules
 
