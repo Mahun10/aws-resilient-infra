@@ -129,7 +129,7 @@ To connect to an instance, I interact with the SSM service, which communicates w
 I chose to move from EC2-based workloads to containers running on **ECS Fargate** for several reasons.
 
 ### 1. Simplicity and operational efficiency
-Because the application is a lightweight static web application, full control over operating system resources provide by running dedicated virtual machines was unnecessary. 
+Because the application is a lightweight static web application, full control over operating system resources providing by running dedicated virtual machines was unnecessary. 
 
 Using **Fargate** allowed me to focus on the application rather than managing servers, patching hosts, or handling capacity planning.
 
