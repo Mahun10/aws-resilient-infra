@@ -142,13 +142,9 @@ For this workload, **ECS Fargate proved more cost-effective than maintaining EC2
 ---
 
 ### 3. Container portability and faster deployments
-Containers also provide:
-- Reproducible deployments  
-- Portable workloads  
-- Faster updates and rollouts  
-- Simplified application lifecycle management  
 
-Because the application is packaged as a Docker image, **updates can be deployed rapidly** by pushing a new image to **ECR** and triggering a new deployment in **ECS**.
+
+Because the application is packaged as a Docker image, the application lifecycle management is simplified. Indeed **updates can be deployed rapidly** by pushing a new image to **ECR** and triggering a new deployment in **ECS**.
 
 ---
 
