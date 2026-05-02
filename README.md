@@ -186,7 +186,7 @@ Updated application in production:
 
 ![Updated Web Page](images/changes_appearweb.png)
 
-## IAM
+## 🚨 IAM
 
 I configured dedicated IAM identities for different use cases:
 
@@ -199,7 +199,7 @@ In addition, I implemented GitHub OIDC integration with AWS IAM roles, eliminati
 
 ![IAM](images/roleIAMgithub.png)
 
-## CloudTrail
+## 📈 CloudTrail
 
 CloudTrail was configured to monitor and log all API activity across the AWS environment.
 
