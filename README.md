@@ -101,12 +101,12 @@ To secure and harden the infrastructure:
 
 Instead of using SSH for instance access, AWS Systems Manager (SSM) was configured.
 
-Traditional SSH access requires:
+**Traditional SSH access requires:**
 
 exposing instances to the Internet via a public IP address
 opening port 22, which increases the attack surface
 
-By using SSM:
+**By using SSM:**
 
 Instances can remain in private subnets with no public IP
 no inbound ports (including SSH) need to be opened
