@@ -190,10 +190,11 @@ Updated application in production:
 I configured dedicated IAM identities for different use cases:
 
 - A Terraform identity used to provision and manage infrastructure  
-- An identity for pushing Docker images to Amazon ECR  
+- An identity for pushing Docker images to Amazon ECR
 
 This separation follows the principle of **least privilege**, ensuring that each component only has the permissions required for its function and reducing the impact of a potential compromise.
 
+![IAM](images/roleIAMgithub.png)
 
 ## CloudTrail
 
