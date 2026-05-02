@@ -30,10 +30,9 @@
 * [Author](#%E2%80%8D-author)
 
 ---
-
 ## 📌 Project Overview
 
-This project demonstrates the design and deployment of a **resilient, scalable, and cloud-native AWS infrastructure** using **Terraform (Infrastructure as Code)** and **GitHub Actions (CI/CD)**.
+This project was built to deploy a simple web application on top of a resilient and secure AWS cloud infrastructure using **Terraform (Infrastructure as Code).
 
 The architecture follows modern cloud and security best practices:
 
@@ -47,9 +46,10 @@ The architecture follows modern cloud and security best practices:
 * Monitoring, alerting, and auditing using **CloudWatch, SNS, and CloudTrail**
 * Secure communication over **HTTPS (ACM + ALB)**
 * Secure access using **SSM Session Manager (no SSH exposure)**
+* **Secure CI/CD authentication using GitHub OIDC with AWS IAM roles**, eliminating static credentials
 * Secrets managed securely via **GitHub Actions Secrets** (with potential improvement using AWS Secrets Manager)
 
-The project initially relied on an EC2-based architecture and was later migrated to a **fully containerized deployment using ECS Fargate**, improving scalability, portability, and reducing operational overhead.
+The project initially relied on an EC2-based architecture and was later migrated to a **fully containerized deployment using ECS Fargate**
 
 ---
 
@@ -69,7 +69,6 @@ The project initially relied on an EC2-based architecture and was later migrated
 * **AWS WAF** protecting the application at Layer 7
 * **SSM Session Manager** for secure instance access without SSH
 * **ACM (AWS Certificate Manager)** for TLS/HTTPS encryption
-
 
 ---
 
@@ -398,22 +397,19 @@ Sensitive variables such as database credentials and alert endpoints are injecte
 ---
 
 
-
 ## 🛡️ Security Best Practices
 
+The infrastructure implements several security best practices:
 
-
-- No SSH access → **SSM Session Manager**
-
-- Private EC2 instances
-
-- RDS not publicly accessible
-
-- Strict Security Groups
-
-- Encrypted state storage
-
-- Secrets never stored in code
+* **No SSH access** → Instances are accessed securely using **SSM Session Manager**, eliminating the need for public IPs and open ports
+* **Private compute resources** → EC2 instances and ECS tasks run in private subnets, reducing exposure to the internet
+* **Database isolation** → The RDS instance is deployed in a private subnet and is not publicly accessible
+* **Network security** → Security Groups enforce strict, least-privilege inbound and outbound rules
+* **Encrypted Terraform state** → Infrastructure state is securely stored in an encrypted S3 bucket
+* **Secrets management** → Sensitive data (e.g., database credentials, alerting endpoints) is injected at runtime via GitHub Secrets, avoiding hardcoding in the source code
+* **Audit and monitoring** → CloudTrail logs all API activity, while CloudWatch and SNS provide real-time monitoring and alerting
+* **Application protection** → AWS WAF provides Layer 7 protection against common web attacks
+* **Secure CI/CD authentication** → Implemented **GitHub OIDC integration with AWS IAM roles** for both Terraform and Docker pipelines, eliminating static AWS credentials and enforcing short-lived, least-privilege access
 
 ---
 
