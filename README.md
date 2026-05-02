@@ -76,7 +76,7 @@ The project initially relied on an EC2-based architecture and was later migrated
 
 ## Initial architecture based on EC2 
 
-The first version of the infrastructure was built on **EC2 instances managed by an Auto Scaling Group**, before being later migrated to containers.
+The first version of the infrastructure was built on **EC2 instances**, before being later migrated to containers.
 
 ### Why EC2 initially?
 
