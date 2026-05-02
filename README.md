@@ -14,6 +14,7 @@
 * [Architecture Evolution](#-architecture-evolution)
     * [Initial architecture based on EC2](#initial-architecture-based-on-ec2)
     * [From EC2 to ECS Fargate](#the-architecture-was-later-migrated-to-ecs-fargate)
+* [IAM](#iam)
 * [CloudTrail](#cloudtrail)
 * [Web Application Firewall (AWS WAF)](#-web-application-firewall-aws-waf)
     * [Implemented Rules](#implemented-rules)
@@ -189,11 +190,14 @@ Updated application in production:
 
 I configured dedicated IAM identities for different use cases:
 
-- A Terraform identity used to provision and manage infrastructure  
-- An identity for pushing Docker images to Amazon ECR  
+- A Terraform identity used to provision and manage the infrastructure
+- An identity dedicated to building and pushing Docker images to Amazon ECR
 
-This separation follows the principle of **least privilege**, ensuring that each component only has the permissions required for its function and reducing the impact of a potential compromise.
+Each identity follows the principle of least privilege, ensuring that only the permissions strictly required for its function are granted.
 
+In addition, I implemented GitHub OIDC integration with AWS IAM roles, eliminating the need for static credentials and improving the overall security of the CI/CD pipeline by using temporary, short-lived access tokens.
+
+![IAM](images/roleIAMgithub.png)
 
 ## CloudTrail
 
