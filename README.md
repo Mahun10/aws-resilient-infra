@@ -35,40 +35,40 @@
 
 This project demonstrates the design and deployment of a **resilient, scalable, and cloud-native AWS infrastructure** using **Terraform (Infrastructure as Code)** and **GitHub Actions (CI/CD)**.
 
-The architecture follows modern cloud best practices:
+The architecture follows modern cloud and security best practices:
 
-- High availability across multiple AZs  
-- Private/public subnet isolation  
-- Containerized application (Docker)  
-- Deployment using **ECS Fargate**  
-- Image storage with **Amazon ECR**  
-- Layer 7 protection using **AWS WAF**  
-- Managed database (RDS)  
-- Monitoring, alerting and auditing
-- HTTPS 
+* High availability across multiple Availability Zones
+* Network segmentation with public and private subnets
+* Containerized application using Docker
+* Deployment with **Amazon ECS Fargate** (serverless containers)
+* Image storage with **Amazon ECR**
+* Layer 7 protection using **AWS WAF**
+* Managed database with **Amazon RDS (PostgreSQL)**
+* Monitoring, alerting, and auditing using **CloudWatch, SNS, and CloudTrail**
+* Secure communication over **HTTPS (ACM + ALB)**
+* Secure access using **SSM Session Manager (no SSH exposure)**
+* Secrets managed securely via **GitHub Actions Secrets** (with potential improvement using AWS Secrets Manager)
 
-The project evolved from an EC2-based architecture to a **fully containerized deployment**, improving scalability and reducing operational overhead.
+The project initially relied on an EC2-based architecture and was later migrated to a **fully containerized deployment using ECS Fargate**, improving scalability, portability, and reducing operational overhead.
 
+---
 
 ## 🏗️ Architecture
 
-
-
 ### Key Components
 
-- **VPC** with public & private subnets across 2 AZs  
-- **Application Load Balancer (ALB)** (internet-facing)  
-- **ECS Fargate** (containerized application in private subnets)  
-- **Amazon ECR** (Docker image registry)  
-- **RDS PostgreSQL** (private, single AZ)  
-- **NAT Gateway** for outbound internet access  
-- **Security Groups** (least privilege access)  
-- **CloudWatch + SNS** for monitoring and alerting  
-- **CloudTrail** for auditing  
-- **AWS WAF** for Layer 7 protection  
-- **SSM Session Manager** (no SSH access required)
-- **HTTPS**
-
+* **VPC** with public and private subnets across two Availability Zones
+* **Application Load Balancer (ALB)** (internet-facing) handling HTTPS traffic
+* **ECS Fargate** running containerized workloads in private subnets
+* **Amazon ECR** as a private Docker registry
+* **Amazon RDS (PostgreSQL)** deployed in a private subnet
+* **NAT Gateway** enabling outbound internet access for private resources
+* **Security Groups** enforcing least-privilege network access
+* **CloudWatch + SNS** for monitoring and alerting
+* **CloudTrail** for API activity logging and auditing
+* **AWS WAF** protecting the application at Layer 7
+* **SSM Session Manager** for secure instance access without SSH
+* **ACM (AWS Certificate Manager)** for TLS/HTTPS encryption
 
 
 ---
