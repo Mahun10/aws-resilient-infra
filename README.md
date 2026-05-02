@@ -143,8 +143,8 @@ For this workload, **ECS Fargate proved more cost-effective than maintaining EC2
 
 ### 3. Container portability and faster deployments
 
+Packaging the application as a Docker image simplifies lifecycle management :  New versions can be deployed seamlessly by pushing an updated image to **Amazon ECR** and triggering a rolling deployment in **ECS**.
 
-Because the application is packaged as a Docker image, the application lifecycle management is simplified. Indeed **updates can be deployed rapidly** by pushing a new image to **ECR** and triggering a new deployment in **ECS**.
 
 ---
 
