@@ -373,13 +373,7 @@ On each push:
 
 
 
-Sensitive values are stored in GitHub Secrets:
-
-- AWS credentials
-
-- Database password
-
-- Alert email
+Sensitive variables such as database credentials and alert endpoints are injected at runtime using GitHub Secrets, avoiding hardcoding in the source code.
 
 
 
