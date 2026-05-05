@@ -17,4 +17,4 @@ resource "aws_s3_object" "index_html" {
   source       = "${path.module}/app/index.html"
   content_type = "text/html"
   etag         = filemd5("${path.module}/app/index.html")
-}
+} 
