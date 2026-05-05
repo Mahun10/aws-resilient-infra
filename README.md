@@ -1,4 +1,4 @@
-# 🚀 Resilient Cloud-Native AWS Infrastructure (Terraform, ECS Fargate, WAF, HTTPS, CI/CD)
+# 🚀 Resilient Cloud AWS Infrastructure (Terraform, ECS Fargate, WAF, HTTPS, CI/CD, IAM)
 
 [![Terraform](https://img.shields.io/badge/Terraform-7B42BC?style=for-the-badge&logo=terraform&logoColor=white)](https://www.terraform.io/)
 ![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
@@ -14,8 +14,8 @@
 * [Architecture Evolution](#-architecture-evolution)
     * [Initial architecture based on EC2](#initial-architecture-based-on-ec2)
     * [From EC2 to ECS Fargate](#the-architecture-was-later-migrated-to-ecs-fargate)
-* [IAM](#iam)
-* [CloudTrail](#cloudtrail)
+* [IAM](#-iam)
+* [CloudTrail](#-cloudtrail)
 * [Web Application Firewall (AWS WAF)](#-web-application-firewall-aws-waf)
     * [Implemented Rules](#implemented-rules)
     * [Attack Simulation Results](#results)
@@ -30,46 +30,45 @@
 * [Author](#%E2%80%8D-author)
 
 ---
-
 ## 📌 Project Overview
 
-This project demonstrates the design and deployment of a **resilient, scalable, and cloud-native AWS infrastructure** using **Terraform (Infrastructure as Code)** and **GitHub Actions (CI/CD)**.
+This project was built to deploy a simple web application on top of a resilient and secure AWS cloud infrastructure using **Terraform (Infrastructure as Code).
 
-The architecture follows modern cloud best practices:
+The architecture follows modern cloud and security best practices:
 
-- High availability across multiple AZs  
-- Private/public subnet isolation  
-- Containerized application (Docker)  
-- Deployment using **ECS Fargate**  
-- Image storage with **Amazon ECR**  
-- Layer 7 protection using **AWS WAF**  
-- Managed database (RDS)  
-- Monitoring, alerting and auditing
-- HTTPS 
+* High availability across multiple Availability Zones
+* Network segmentation with public and private subnets
+* Containerized application using Docker
+* Deployment with **Amazon ECS Fargate** (serverless containers)
+* Image storage with **Amazon ECR**
+* Layer 7 protection using **AWS WAF**
+* Managed database with **Amazon RDS (PostgreSQL)**
+* Monitoring, alerting, and auditing using **CloudWatch, SNS, and CloudTrail**
+* Secure communication over **HTTPS (ACM + ALB)**
+* Secure access using **SSM Session Manager (no SSH exposure)**
+* **Secure CI/CD authentication using GitHub OIDC with AWS IAM roles**, eliminating static credentials
+* Secrets managed securely via **GitHub Actions Secrets** (with potential improvement using AWS Secrets Manager)
 
-The project evolved from an EC2-based architecture to a **fully containerized deployment**, improving scalability and reducing operational overhead.
+The project initially relied on an EC2-based architecture and was later migrated to a **fully containerized deployment using ECS Fargate**
 
+---
 
 ## 🏗️ Architecture
 
-
-
 ### Key Components
 
-- **VPC** with public & private subnets across 2 AZs  
-- **Application Load Balancer (ALB)** (internet-facing)  
-- **ECS Fargate** (containerized application in private subnets)  
-- **Amazon ECR** (Docker image registry)  
-- **RDS PostgreSQL** (private, single AZ)  
-- **NAT Gateway** for outbound internet access  
-- **Security Groups** (least privilege access)  
-- **CloudWatch + SNS** for monitoring and alerting  
-- **CloudTrail** for auditing  
-- **AWS WAF** for Layer 7 protection  
-- **SSM Session Manager** (no SSH access required)
-- **HTTPS**
-
-
+* **VPC** with public and private subnets across two Availability Zones
+* **Application Load Balancer (ALB)** (internet-facing) handling HTTPS traffic
+* **ECS Fargate** running containerized workloads in private subnets
+* **Amazon ECR** as a private Docker registry
+* **Amazon RDS (PostgreSQL)** deployed in a private subnet
+* **NAT Gateway** enabling outbound internet access for private resources
+* **Security Groups** enforcing least-privilege network access
+* **CloudWatch + SNS** for monitoring and alerting
+* **CloudTrail** for API activity logging and auditing
+* **AWS WAF** protecting the application at Layer 7
+* **SSM Session Manager** for secure instance access without SSH
+* **ACM (AWS Certificate Manager)** for TLS/HTTPS encryption
 
 ---
 
@@ -77,7 +76,7 @@ The project evolved from an EC2-based architecture to a **fully containerized de
 
 ## Initial architecture based on EC2 
 
-The first version of the infrastructure was built on **EC2 instances managed by an Auto Scaling Group**, before being later migrated to containers.
+The first version of the infrastructure was built on **EC2 instances**, before being later migrated to containers.
 
 ### Why EC2 initially?
 
@@ -101,12 +100,12 @@ To secure and harden the infrastructure:
 
 Instead of using SSH for instance access, AWS Systems Manager (SSM) was configured.
 
-Traditional SSH access requires:
+**Traditional SSH access requires:**
 
 exposing instances to the Internet via a public IP address
 opening port 22, which increases the attack surface
 
-By using SSM:
+**By using SSM:**
 
 Instances can remain in private subnets with no public IP
 no inbound ports (including SSH) need to be opened
@@ -129,7 +128,7 @@ To connect to an instance, I interact with the SSM service, which communicates w
 I chose to move from EC2-based workloads to containers running on **ECS Fargate** for several reasons.
 
 ### 1. Simplicity and operational efficiency
-Because the application is a lightweight static web application, running dedicated virtual machines was unnecessary. Full control over operating system resources was not required for this use case, and advanced host-level integrations (such as SIEM agents or custom OS hardening) were outside the project scope.
+Because the application is a lightweight static web application, full control over operating system resources providing by running dedicated virtual machines was unnecessary. 
 
 Using **Fargate** allowed me to focus on the application rather than managing servers, patching hosts, or handling capacity planning.
 
@@ -143,13 +142,9 @@ For this workload, **ECS Fargate proved more cost-effective than maintaining EC2
 ---
 
 ### 3. Container portability and faster deployments
-Containers also provide:
-- Reproducible deployments  
-- Portable workloads  
-- Faster updates and rollouts  
-- Simplified application lifecycle management  
 
-Because the application is packaged as a Docker image, **updates can be deployed rapidly** by pushing a new image to **ECR** and triggering a new deployment in **ECS**.
+Packaging the application as a Docker image simplifies lifecycle management :  New versions can be deployed seamlessly by pushing an updated image to **Amazon ECR** and triggering a rolling deployment in **ECS**.
+
 
 ---
 
@@ -186,7 +181,7 @@ Updated application in production:
 
 ![Updated Web Page](images/changes_appearweb.png)
 
-## IAM
+## 🚨 IAM
 
 I configured dedicated IAM identities for different use cases:
 
@@ -199,7 +194,7 @@ In addition, I implemented GitHub OIDC integration with AWS IAM roles, eliminati
 
 ![IAM](images/roleIAMgithub.png)
 
-## CloudTrail
+## 📈 CloudTrail
 
 CloudTrail was configured to monitor and log all API activity across the AWS environment.
 
@@ -213,7 +208,7 @@ detecting configuration changes within the VPC and associated services
 
 ## 🧱 Web Application Firewall (AWS WAF)
 
-An AWS WAF Web ACL is deployed and attached to the Application Load Balancer to protect the application from Layer 7 attacks.
+An AWS WAF Web ACL was deployed and attached to the Application Load Balancer to protect the application from Layer 7 attacks.
 
 ### Implemented Rules
 
@@ -373,13 +368,7 @@ On each push:
 
 
 
-Sensitive values are stored in GitHub Secrets:
-
-- AWS credentials
-
-- Database password
-
-- Alert email
+Sensitive variables such as database credentials and alert endpoints are injected at runtime using GitHub Secrets, avoiding hardcoding in the source code.
 
 
 
@@ -404,22 +393,19 @@ Sensitive values are stored in GitHub Secrets:
 ---
 
 
-
 ## 🛡️ Security Best Practices
 
+The infrastructure implements several security best practices:
 
-
-- No SSH access → **SSM Session Manager**
-
-- Private EC2 instances
-
-- RDS not publicly accessible
-
-- Strict Security Groups
-
-- Encrypted state storage
-
-- Secrets never stored in code
+* **No SSH access** → Instances are accessed securely using **SSM Session Manager**, eliminating the need for public IPs and open ports
+* **Private compute resources** → EC2 instances and ECS tasks run in private subnets, reducing exposure to the internet
+* **Database isolation** → The RDS instance is deployed in a private subnet and is not publicly accessible
+* **Network security** → Security Groups enforce strict, least-privilege inbound and outbound rules
+* **Encrypted Terraform state** → Infrastructure state is securely stored in an encrypted S3 bucket
+* **Secrets management** → Sensitive data (e.g., database credentials, alerting endpoints) is injected at runtime via GitHub Secrets, avoiding hardcoding in the source code
+* **Audit and monitoring** → CloudTrail logs all API activity, while CloudWatch and SNS provide real-time monitoring and alerting
+* **Application protection** → AWS WAF provides Layer 7 protection against common web attacks
+* **Secure CI/CD authentication** → Implemented **GitHub OIDC integration with AWS IAM roles** for both Terraform and Docker pipelines, eliminating static AWS credentials and enforcing short-lived, least-privilege access
 
 ---
 
