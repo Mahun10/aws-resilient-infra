@@ -30,8 +30,7 @@ resource "aws_autoscaling_policy" "request_count_target_tracking" {
       resource_label         = "${aws_lb.app_alb.arn_suffix}/${aws_lb_target_group.app_tg.arn_suffix}"
     }
 
-    target_value       = 500
-    scale_in_cooldown  = 300
-    scale_out_cooldown = 120
+    target_value     = 500
+    disable_scale_in = false
   }
 }
