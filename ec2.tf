@@ -18,22 +18,19 @@ resource "aws_launch_template" "app_lt" {
   user_data = base64encode(<<-EOF
 #!/bin/bash
 dnf update -y
-dnf install -y httpd amazon-ssm-agent
+dnf install -y httpd amazon-ssm-agent awscli
 
 systemctl enable amazon-ssm-agent
 systemctl start amazon-ssm-agent
 
-systemctl enable httpd
-
 rm -rf /var/www/html/*
 
-cat > /var/www/html/index.html <<'HTML'
-${file("${path.module}/app/index.html")}
-HTML
+aws s3 sync s3://${aws_s3_bucket.static_site_assets.bucket}/ /var/www/html/
 
 chown -R apache:apache /var/www/html
 chmod -R 755 /var/www/html
 
+systemctl enable httpd
 systemctl restart httpd
 EOF
   )
@@ -49,4 +46,31 @@ EOF
   iam_instance_profile {
     name = aws_iam_instance_profile.ec2_ssm_profile.name
   }
+
+  depends_on = [
+    aws_s3_object.index_html,
+    aws_iam_role_policy.ec2_s3_read_static_site
+  ]
+}
+
+resource "aws_iam_role_policy" "ec2_s3_read_static_site" {
+  name = "${var.project_name}-ec2-s3-read-static-site"
+  role = aws_iam_role.ec2_ssm_role.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "s3:GetObject",
+          "s3:ListBucket"
+        ]
+        Resource = [
+          aws_s3_bucket.static_site_assets.arn,
+          "${aws_s3_bucket.static_site_assets.arn}/*"
+        ]
+      }
+    ]
+  })
 }
