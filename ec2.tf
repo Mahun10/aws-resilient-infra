@@ -19,11 +19,22 @@ resource "aws_launch_template" "app_lt" {
 #!/bin/bash
 dnf update -y
 dnf install -y httpd amazon-ssm-agent
-systemctl enable httpd
-systemctl start httpd
+
 systemctl enable amazon-ssm-agent
 systemctl start amazon-ssm-agent
-echo "Hello from $(hostname -f)" > /var/www/html/index.html
+
+systemctl enable httpd
+
+rm -rf /var/www/html/*
+
+cat > /var/www/html/index.html <<'HTML'
+${file("${path.module}/app/index.html")}
+HTML
+
+chown -R apache:apache /var/www/html
+chmod -R 755 /var/www/html
+
+systemctl restart httpd
 EOF
   )
 
