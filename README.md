@@ -32,7 +32,7 @@
 ---
 ## 📌 Project Overview
 
-This project was built to deploy a simple web application on top of a resilient and secure AWS cloud infrastructure using **Terraform (Infrastructure as Code).
+This project was built to deploy a simple web application on top of a resilient and secure AWS cloud infrastructure using **Terraform** (Infrastructure as Code).
 
 The architecture follows modern cloud and security best practices:
 
